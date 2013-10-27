@@ -1,0 +1,22 @@
+<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+  <div class="well sidebar-nav">
+    <ul class="nav nav-pills nav-stacked">
+      <li>Latest Entries</li>
+    <% @latest_posts.each do |p| %>
+      <li><%= link_to p.title, p %></li>
+    <% end %>
+      <li>Countries</li>
+    <% @post_countries.each do |c| %>
+      <li><%= c %></li>
+    <% end %>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li>Fun Facts</li>
+              <li>Farthese North...</li>
+              <li>Farthest South...</li>
+              <li>Farthest West...</li>
+              <li>Farthest East...</li>
+    </ul>
+  </div><!--/.well -->
+</div><!--/span-->

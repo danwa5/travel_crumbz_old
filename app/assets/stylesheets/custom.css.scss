@@ -1,0 +1,176 @@
+
+.form-horizontal {
+  margin-bottom: 60px;
+}
+
+#tile-1,
+#tile-2,
+#tile-3,
+#tile-4,
+#tile-5,
+#tile-6,
+#tile-7,
+#tile-8,
+#tile-9 {
+  h3 { color: #fff; }
+  h4 { color: #ccc; }
+}
+
+#tile-1,
+#tile-2,
+#tile-3,
+#tile-4,
+#tile-5,
+#tile-6,
+#tile-7,
+#tile-8,
+#tile-9,
+.tile-content {
+  height: 260px;
+  border-radius: 8px;
+  float: left;
+  margin-bottom: 5px;
+  padding: 15px;
+  color: white;
+  /*font-size: 21px;
+  font-weight: 200;
+  line-height: 2.1428571435;
+  color: inherit;*/
+}
+
+.post-tile {
+  position: relative;
+}
+
+.tile-left {
+  margin-right: 5px;
+}
+
+.tile-content {
+  color: #000;
+  background-color: #FF6600;
+  opacity: 0.85;
+  display: none;
+  z-index: 10;
+  p { font-weight: 500; }
+}
+
+#tile-1 {
+  width: 441px;
+  background:url(/assets/copenhagen.jpg);
+}
+
+#tile-2 {
+  width: 401px;
+  background:url(/assets/sydney.jpg);
+}
+
+#tile-3 {
+  width: 180px;
+  background:url(/assets/chocolisto.jpg);
+}
+
+#tile-4 {
+  width: 661px;
+  background:url(/assets/cotopaxi.jpg);
+}
+
+#tile-5 {
+  width: 600px;
+  background:url(/assets/argentina.jpg);
+  background-repeat:no-repeat;
+  background-size: 100%;
+}
+
+#tile-6 {
+  width: 241px;
+  background:url(/assets/chile.jpg);
+}
+
+#tile-7 {
+  width: 320px;
+  background:url(/assets/guayaquil.jpg);
+}
+
+#tile-8 {
+  width: 521px;
+  background:url(/assets/villarica.jpg);
+}
+
+#tile-9 {
+  width: 847px;
+  background:url(/assets/patagonia.jpg);
+  background-position:right center;
+}
+
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+
+/*
+ * Bootstrap 3.0 Override
+ * --------------------------------------------------
+ */
+
+ /*
+ * Gmaps4Rails
+ * --------------------------------------------------
+ */
+
+.map-container {
+  background-color: #fff;
+}
+
+
+/*
+ * Style twaks
+ * --------------------------------------------------
+ */
+body {
+  padding-top: 70px;
+}
+footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 768px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+  }
+
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-right.active {
+    right: 50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left.active {
+    left: 50%; /* 6 columns */
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 50%; /* 6 columns */
+  }
+}

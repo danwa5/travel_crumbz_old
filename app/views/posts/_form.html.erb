@@ -1,0 +1,100 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+  <%= form_for(@post, html: {class:"form-horizontal", role:"form"}) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+
+    <fieldset>
+      <legend>Details</legend>
+    </fieldset>
+
+    <div class="form-group">
+      <%= f.label :title, nil, class: "col-md-3 control-label" %>
+      <div class="col-md-9">
+        <%= f.text_field :title, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :body, nil, class: "col-md-3 control-label" %>
+      <div class="col-md-9">
+        <%= f.text_area :body, {class: "form-control", rows: 8} %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :start_date, nil, class: "col-md-3 control-label" %>
+      <div class="col-md-9 form-inline">
+        <%= f.date_field :start_date, class: "form-control" %>
+        <%#= f.date_select :start_date, {order: [:month, :day, :year], :prompt => true, use_short_month: true, start_year: 2000, end_year: DateTime.now.year, default: Time.now, date_separator: " / "}, {class: "form-control", style: "width: 90px;"} %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :end_date, nil, class: "col-md-3 control-label" %>
+      <div class="col-md-9">
+        <%= f.date_field :end_date, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-offset-3 col-md-9">
+        <div class="checkbox">
+          <label>
+            <%= f.check_box :starred %> Tag in my <i>Favorite 9</i>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <fieldset>
+      <legend>Location</legend>
+    </fieldset>
+
+    <%= f.fields_for :location do |loc| %>
+    <div class="form-group">
+      <%= loc.label :street, nil, class: "col-md-3 control-label" %>
+      <div class="col-md-9">
+        <%= loc.text_field :street, {class: "form-control"} %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= loc.label :city, nil, class: "col-md-3 control-label" %>
+      <div class="col-md-9">
+        <%= loc.text_field :city, {class: "form-control"} %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= loc.label :state, "State&nbsp;/&nbsp;Province".html_safe, class: "col-md-3 control-label" %>
+      <div class="col-md-9">
+        <%= loc.text_field :state, {class: "form-control"} %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= loc.label :country, nil, class: "col-md-3 control-label" %>
+      <div class="col-md-9">
+        <%= loc.select :country, countries, {}, {class: "form-control"} %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= loc.label :postal, "Postal&nbsp;Code".html_safe, class: "col-md-3 control-label" %>
+      <div class="col-md-9">
+        <%= loc.text_field :postal, {class: "form-control"} %>
+      </div>
+    </div>
+    <% end %>
+
+    <div class="form-group">
+      <div class="col-md-offset-3 col-md-7">
+        <%= f.submit button_label, class: "btn btn-primary" %>
+        <%= link_to "Cancel", cancel_path, {class: "btn btn-primary", "data-no-turbolink" => true} %>
+      </div>
+    </div>
+    <% end %>
+
+  </div>
+</div>

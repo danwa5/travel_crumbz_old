@@ -1,0 +1,4 @@
+<% provide(:title, "Update Post") %>
+<center><h1>Update Post</h1></center>
+
+<%= render partial: 'posts/form', locals: { button_label: "Save Changes", cancel_path: post_path(@post) } %>

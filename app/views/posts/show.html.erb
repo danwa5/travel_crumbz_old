@@ -1,0 +1,39 @@
+<% provide(:title, "Update Post") %>
+
+<div class="row row-offcanvas row-offcanvas-right">
+  <div class="col-xs-12 col-sm-9">
+
+<center>
+  <h1><%= @post.title %></h1>
+  <h5><%= @post.get_dates %></h5>
+</center>
+
+
+<p>
+  <strong>Location:</strong>
+  <%= @post.location.address %>
+</p>
+
+<p>
+  <strong>Coordinates:</strong>
+  <%= @post.location.to_coordinates %>
+</p>
+
+<p>
+  <strong>Tag as favorite:</strong>
+  <%= @post.starred %>
+</p>
+
+<p>
+  <%= @post.body.html_safe %>
+</p>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path, {"data-no-turbolink" => true} %>   
+    
+
+  </div><!--/span-->
+
+  <%= render partial: 'layouts/sidebar' %>
+  
+</div><!--/row-->
