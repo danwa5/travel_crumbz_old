@@ -31,6 +31,10 @@ class Location
       end
     end
 
+    def city_country
+      self.city + ", " + self.country
+    end
+
     def to_coordinates
       unless self.coordinates.blank?
         [self.coordinates[1],self.coordinates[0]]

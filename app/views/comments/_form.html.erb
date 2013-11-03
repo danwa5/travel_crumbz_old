@@ -1,21 +1,37 @@
-<%= form_for([@post, @comment]) do |f| %>
-  <% if @comment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+<div class="row">
+  <div class="col-md-7 col-md-offset-2">
 
-      <ul>
-      <% @comment.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <%= form_for([@post, @comment], html: {class:"form-horizontal", role:"form"}) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+
+    <div class="form-group">
+      <%= f.label :rating, nil, class: "col-md-3 control-label" %>
+      <div class="col-md-9">
+        <div id="user_star"></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :body, nil, class: "col-md-3 control-label" %>
+      <div class="col-md-9">
+        <%= f.text_area :body, {class: "form-control", cols: 20, rows: 8} %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-offset-3 col-md-7">
+        <%= f.submit button_label, class: "btn btn-primary" %>
+        <%= link_to "Cancel", cancel_path, {class: "btn btn-primary", "data-no-turbolink" => true} %>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :body %><br>
-    <%= f.text_field :body %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
+
+<script>
+  $('#user_star').raty({
+    score: <%= @comment.rating.nil? ? 0 : @comment.rating %>,
+    readOnly: false
+  });
+</script>

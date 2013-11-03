@@ -1,0 +1,35 @@
+<% provide(:title, "Entries in " + @country) %>
+
+<div class="row row-offcanvas row-offcanvas-right">
+  <div class="col-xs-12 col-sm-9">
+
+    <div class="jumbotron">
+      <%= gmaps4rails(@pins) %>
+    </div>
+
+    <div class="row entry">
+      <center><h1>Entries on <%= @country %></h1></center>
+    </div>
+    
+  <% @posts.each_with_index do |post, index| %>
+    <div class="row entry">
+      <div class="col-xs-3 entry-image">
+        <%= link_to image_tag("/assets/testing/trees.jpg"), post %>
+        <!--img src="/assets/testing/trees.jpg" width="210px"-->
+      </div>
+      <div class="col-xs-9 entry-content">
+        <h3><%= link_to post.title, post %></h3>
+        <h4><small><%= post.get_dates %> in <%= post.location.city %></small></h4>
+        <p><%= post.snippet_by_words(post.body, 50) %></p>          
+        <p><%= post.likes.nil? ? "0" : post.likes %> likes | <%= post.comments.count %> comments</p>
+      </div>
+    </div>
+  <% end %>
+
+  </div><!--/span-->
+
+  <%= render partial: 'layouts/sidebar' %>
+  
+</div><!--/row-->
+
+<%= yield :scripts %>

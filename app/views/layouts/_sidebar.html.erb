@@ -5,18 +5,17 @@
     <% @latest_posts.each do |p| %>
       <li><%= link_to p.title, p %></li>
     <% end %>
-      <li>Countries</li>
-    <% @post_countries.each do |c| %>
-      <li><%= c %></li>
+      <li class="nav nav-divider"></li>
+      <li>Entries by Country</li>
+    <% @countries.each do |c| %>
+      <li><%= link_to c["_id"]["country"] + " (" + c["posts_count"].to_s + ")", {:action => "countries", :controller => "static_pages", :query => c["_id"]["country"]}, {"data-no-turbolink" => true} %></li>
     <% end %>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li>Fun Facts</li>
-              <li>Farthese North...</li>
-              <li>Farthest South...</li>
-              <li>Farthest West...</li>
-              <li>Farthest East...</li>
+      <li class="nav nav-divider"></li>
+      <li>Destination Facts</li>
+      <li>Farthese North...</li>
+      <li>Farthest South...</li>
+      <li>Farthest West...</li>
+      <li>Farthest East...</li>
     </ul>
   </div><!--/.well -->
 </div><!--/span-->

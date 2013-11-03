@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all
+    @comments = @post.comments.all
   end
 
   # GET /comments/1
@@ -23,29 +23,29 @@ class CommentsController < ApplicationController
   def edit
   end
 
-  # POST /comments
-  # POST /comments.json
   def create
     #@comment = Comment.new(comment_params)
     @comment = @post.comments.build(comment_params)
+    @comment.rating = params[:score]
 
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to [@post, @comment], notice: 'Comment was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @comment }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+    if (@comment.save)
+      flash[:success] = "Comment successfully added to post!"
+    else
+      flash[:warning] = "Comment could not be added to post!"
     end
+
+    redirect_to @post
   end
 
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
   def update
+    @comment.rating = params[:score]
+
     respond_to do |format|
       if @comment.update_attributes(comment_params)
-        format.html { redirect_to [@post, @comment], notice: 'Comment was successfully updated.' }
+        flash[:success] = "Comment successfully updated!"
+        format.html { redirect_to @post, notice: 'Comment was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -73,7 +73,7 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:body)
+      params.require(:comment).permit(:rating, :body)
     end
 
     def load_post

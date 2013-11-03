@@ -2,7 +2,7 @@ module ApplicationHelper
 
   # Returns the full title on a per-page basis.
   def full_title(page_title)
-    base_title = "Travel Crumbs"
+    base_title = "Travel Crumbz"
     if page_title.empty?
       base_title
     else
@@ -10,9 +10,16 @@ module ApplicationHelper
     end
   end
 
+  def date_ordinal_format(date)
+    unless date.blank?
+      #date.strftime("%B %-d, %Y")
+      date.to_formatted_s(:long_ordinal)
+    end
+  end
+
   def countries
     [
-      ['',''],
+      [''],
       ['Argentina'],
       ['Australia'],
       ['Austria'],
@@ -22,15 +29,20 @@ module ApplicationHelper
       ['Chile'],
       ['China'],
       ['Croatia'],
+      ['Czech Republic'],
       ['Denmark'],
       ['Ecuador'],
       ['France'],
       ['Germany'],
+      ['Hungary'],
       ['Indonesia'],
+      ['Italy'],
       ['Japan'],
       ['Laos'],
+      ['Malaysia'],
       ['Norway'],
       ['Peru'],
+      ['Slovenia'],
       ['Spain'],
       ['Sweden'],
       ['Thailand'],

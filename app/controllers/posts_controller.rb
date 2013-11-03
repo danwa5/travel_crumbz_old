@@ -1,14 +1,23 @@
 class PostsController < ApplicationController
+  include PostsHelper
+
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :get_latest_posts
-  before_action :get_post_countries
+  before_action :get_posts_by_countries
 
   def index
-    @all_posts = Post.all
-    get_map_pins
+    @all_posts = Post.all.sort("start_date DESC")
+
+    @posts = Post.starred_posts
+    configure_posts_for_gmaps(@posts)
   end
 
   def show
+    get_city_avg_rating(@post.location.city)
+
+    lat2 = @post.location.coordinates[1]
+    lng2 = @post.location.coordinates[0]
+    @dist = GeoDistance::Haversine.geo_distance( 43.6425662, -79.3870568, lat2, lng2 )
   end
 
   def new
@@ -54,7 +63,7 @@ class PostsController < ApplicationController
     #end
   end
 
-   def destroy
+  def destroy
     @post.destroy
     respond_to do |format|
       format.html { redirect_to posts_url }
@@ -62,10 +71,29 @@ class PostsController < ApplicationController
     end
   end
 
+  def like
+    @post = Post.find(params[:post_id])
+    if @post.likes.nil?
+      likes_count = 0
+    else
+      likes_count = @post.likes
+    end
+    @post.update_attribute(:likes, likes_count+1)
+    redirect_to @post
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
+    end
+
+    def get_city_avg_rating(city)
+      match = {"$match" => {"location.city" => city}}
+      unwind = {"$unwind" => "$comments"}
+      group = {"$group" => {"_id" => {"city" => "$location.city", "country" => "$location.country"}, "avg_rating" => {"$avg" => "$comments.rating"}}}
+      @city_avg_rating = Post.collection.aggregate([match, unwind, group])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -74,23 +102,12 @@ class PostsController < ApplicationController
         location_attributes: [:id, :street, :city, :state, :country, :postal])
     end
 
-    def get_map_pins
-      @pins = String.new
-      @posts = Post.where(starred: true)
-      @posts.each do |p|
-        @pins = @pins + p.location.to_gmaps4rails.to_s
-      end
-
-      @pins = @pins.gsub(/\]\[/, ",")
-      @pins = @pins.gsub(/"/,"'")
-    end
-
     def get_latest_posts
-      @latest_posts = Post.all.sort("created_at DESC").limit(10)
+      @latest_posts = Post.latest_posts
     end
 
-    def get_post_countries
-      @post_countries = Post.distinct("location.country").sort()
+    def get_posts_by_countries
+      @countries = Post.posts_by_countries
     end
 
 end

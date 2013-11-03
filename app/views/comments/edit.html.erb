@@ -1,6 +1,8 @@
-<h1>Editing comment</h1>
+<% provide(:title, "Edit Comment") %>
+<center><h1>Edit Comment</h1></center>
+<br/>
 
-<%= render 'form' %>
+<%= render partial: 'comments/form', locals: { button_label: "Save Changes", cancel_path: post_path(@post) } %>
 
 <%= link_to 'Show', post_comment_path(@post, @comment) %> |
 <%= link_to 'Back', post_comments_path(@post) %>

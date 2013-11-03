@@ -1,39 +1,102 @@
-<% provide(:title, "Update Post") %>
+<% provide(:title, @post.title) %>
 
 <div class="row row-offcanvas row-offcanvas-right">
   <div class="col-xs-12 col-sm-9">
 
-<center>
-  <h1><%= @post.title %></h1>
-  <h5><%= @post.get_dates %></h5>
-</center>
+    <center>
+      <h1><%= @post.title %></h1>
+      <h5><%= @post.location.city_country %></h5>
+      <h5><%= @post.get_dates %></h5>
+    </center>
 
+    <p>
+      <strong>Coordinates:</strong>
+      <%= @post.location.to_coordinates %><br/>
+      <%= @dist.miles.round(0) %> miles / <%= @dist.kms.round(0) %> km from Toronto
+    </p>
 
-<p>
-  <strong>Location:</strong>
-  <%= @post.location.address %>
-</p>
+    <p>
+      <strong>Tag as favorite:</strong>
+      <%= @post.starred %>
+    </p>
 
-<p>
-  <strong>Coordinates:</strong>
-  <%= @post.location.to_coordinates %>
-</p>
+    <p>
+      <%= @post.body.html_safe %>
+    </p>
 
-<p>
-  <strong>Tag as favorite:</strong>
-  <%= @post.starred %>
-</p>
+    <p>
+      <strong>Likes:</strong>
+      <%= @post.likes.nil? ? 0 : @post.likes %>
+      <%= link_to post_like_path(@post), method:"put" do %>
+        <span class="glyphicon glyphicon-thumbs-up"></span>
+      <% end %>
+    </p>
 
-<p>
-  <%= @post.body.html_safe %>
-</p>
+    <p>
+      <strong>Loves:</strong>
+      <%= @post.loves.nil? ? 0 : @post.loves %>
+      <span class="glyphicon glyphicon-heart"></span>
+    </p>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path, {"data-no-turbolink" => true} %>   
-    
+    <p>
+      <strong>Comments (<%= @post.comments.count %>)</strong><br/>
+      <span class="avg_star"></span> (<%= @city_avg_rating.size==0 ? "n/a" : @city_avg_rating[0]["avg_rating"] %>)
+
+      <% @post.comments.each_with_index do |c, index| %>
+      <p>
+        <div class="star<%= index %>"></div> <%= c.body %> 
+        (posted on <%= c.get_create_date %> <%= link_to "edit", edit_post_comment_path(@post, c) %>)
+      </p>
+      <% end %>
+    </p>
+
+    <div class="row">
+      <div class="col-md-6">
+        <%= form_for([@post, @post.comments.build], html: {class:"form-horizontal", role:"form"}) do |f| %>
+        <div class="form-group">
+          <%= f.label :rating, nil, class: "col-md-3 control-label" %>
+          <div class="col-md-9">
+            <div id="user_star"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :body, nil, class: "col-md-3 control-label" %>
+          <div class="col-md-9">
+            <%= f.text_area :body, {class: "form-control"} %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-offset-3 col-md-7">
+            <%= f.submit "Add Comment", class: "btn btn-primary" %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+    <%= link_to 'Edit', edit_post_path(@post) %> |
+    <%= link_to 'Back', posts_path, {"data-no-turbolink" => true} %>   
 
   </div><!--/span-->
 
   <%= render partial: 'layouts/sidebar' %>
   
 </div><!--/row-->
+
+<script>
+  $('#user_star').raty({
+    readOnly: false
+  });
+
+  $('.avg_star').raty({
+    score: <%= @post.comments.count == 0 ? 0 : @city_avg_rating[0]["avg_rating"] %>,
+    readOnly: true
+  });
+
+<% @post.comments.each_with_index do |c, index| %>
+  $('.star<%= index %>').raty({
+    score: <%= c.rating.nil? ? 0 : c.rating %>,
+    readOnly: true
+  });
+<% end %>
+</script>

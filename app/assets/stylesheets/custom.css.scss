@@ -3,6 +3,43 @@
   margin-bottom: 60px;
 }
 
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+
+.entry {
+  margin-bottom: 30px;
+}
+
+.entry-image img {
+  padding: 3px;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  width: 210px;
+  height: 180px;
+}
+
+.entry-content {
+  padding-left: 25px;
+  h3 {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    a { color: #1798a6; }
+  }
+  h4 {
+    margin-bottom: 3px;
+  }
+}
+
+/*
+ * Homepage Photo Tiling
+ * --------------------------------------------------
+ */
+
 #tile-1,
 #tile-2,
 #tile-3,
@@ -57,64 +94,51 @@
 
 #tile-1 {
   width: 441px;
-  background:url(/assets/copenhagen.jpg);
+  background:url(/assets/testing/copenhagen.jpg);
 }
 
 #tile-2 {
   width: 401px;
-  background:url(/assets/sydney.jpg);
+  background:url(/assets/testing/sydney.jpg);
 }
 
 #tile-3 {
   width: 180px;
-  background:url(/assets/chocolisto.jpg);
+  background:url(/assets/testing/chocolisto.jpg);
 }
 
 #tile-4 {
   width: 661px;
-  background:url(/assets/cotopaxi.jpg);
+  background:url(/assets/testing/cotopaxi.jpg);
 }
 
 #tile-5 {
   width: 600px;
-  background:url(/assets/argentina.jpg);
+  background:url(/assets/testing/argentina.jpg);
   background-repeat:no-repeat;
   background-size: 100%;
 }
 
 #tile-6 {
   width: 241px;
-  background:url(/assets/chile.jpg);
+  background:url(/assets/testing/chile.jpg);
 }
 
 #tile-7 {
   width: 320px;
-  background:url(/assets/guayaquil.jpg);
+  background:url(/assets/testing/guayaquil.jpg);
 }
 
 #tile-8 {
   width: 521px;
-  background:url(/assets/villarica.jpg);
+  background:url(/assets/testing/villarica.jpg);
 }
 
 #tile-9 {
   width: 847px;
-  background:url(/assets/patagonia.jpg);
+  background:url(/assets/testing/patagonia.jpg);
   background-position:right center;
 }
-
-#error_explanation {
-  color: #f00;
-  ul {
-    list-style: none;
-    margin: 0 0 18px 0;
-  }
-}
-
-/*
- * Bootstrap 3.0 Override
- * --------------------------------------------------
- */
 
  /*
  * Gmaps4Rails
@@ -174,3 +198,254 @@ footer {
     width: 50%; /* 6 columns */
   }
 }
+
+/*
+ * Field with Errors
+ * --------------------------------------------------
+ */
+.form-group.warning .control-label,
+.warning.field_with_errors .control-label,
+.form-group.warning .help-block,
+.warning.field_with_errors .help-block,
+.form-group.warning .help-inline,
+.warning.field_with_errors .help-inline {
+  color: #c09853;
+}
+
+.form-group.warning .checkbox,
+.warning.field_with_errors .checkbox,
+.form-group.warning .radio,
+.warning.field_with_errors .radio,
+.form-group.warning input,
+.warning.field_with_errors input,
+.form-group.warning select,
+.warning.field_with_errors select,
+.form-group.warning textarea,
+.warning.field_with_errors textarea {
+  color: #c09853;
+}
+
+.form-group.warning input,
+.warning.field_with_errors input,
+.form-group.warning select,
+.warning.field_with_errors select,
+.form-group.warning textarea,
+.warning.field_with_errors textarea {
+  border-color: #c09853;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.form-group.warning input:focus,
+.warning.field_with_errors input:focus,
+.form-group.warning select:focus,
+.warning.field_with_errors select:focus,
+.form-group.warning textarea:focus,
+.warning.field_with_errors textarea:focus {
+  border-color: #a47e3c;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #dbc59e;
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #dbc59e;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #dbc59e;
+}
+
+.form-group.warning .input-prepend .add-on, .warning.field_with_errors .input-prepend .add-on,
+.form-group.warning .input-append .add-on,
+.warning.field_with_errors .input-append .add-on {
+  color: #c09853;
+  background-color: #fcf8e3;
+  border-color: #c09853; }
+
+.form-group.error .control-label,
+.field_with_errors .control-label,
+.form-group.error .help-block,
+.field_with_errors .help-block,
+.form-group.error .help-inline,
+.field_with_errors .help-inline {
+  color: #b94a48;
+}
+
+.form-group.error .checkbox,
+.field_with_errors .checkbox,
+.form-group.error .radio,
+.field_with_errors .radio,
+.form-group.error input,
+.form-horizontal .field_with_errors input,
+.field_with_errors input,
+.form-group.error select,
+.form-horizontal .field_with_errors select,
+.field_with_errors select,
+.form-group.error textarea,
+.form-horizontal .field_with_errors textarea,
+.field_with_errors textarea {
+  color: #b94a48;
+}
+
+.form-group.error input,
+.form-horizontal .field_with_errors input,
+.field_with_errors input,
+.form-group.error select,
+.form-horizontal .field_with_errors select,
+.field_with_errors select,
+.form-group.error textarea,
+.form-horizontal .field_with_errors textarea,
+.field_with_errors textarea {
+  border-color: #b94a48;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.form-group.error input:focus,
+.field_with_errors input:focus,
+.form-group.error select:focus,
+.field_with_errors select:focus,
+.form-group.error textarea:focus,
+.field_with_errors textarea:focus {
+  border-color: #953b39;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+}
+
+.form-group.error .input-prepend .add-on,
+.field_with_errors .input-prepend .add-on,
+.form-group.error .input-append .add-on,
+.field_with_errors .input-append .add-on {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #b94a48;
+}
+
+.form-group.success .control-label,
+.success.field_with_errors .control-label,
+.form-group.success .help-block,
+.success.field_with_errors .help-block,
+.form-group.success .help-inline,
+.success.field_with_errors .help-inline {
+  color: #468847;
+}
+
+.form-group.success .checkbox,
+.success.field_with_errors .checkbox,
+.form-group.success .radio,
+.success.field_with_errors .radio,
+.form-group.success input,
+.success.field_with_errors input,
+.form-group.success select,
+.success.field_with_errors select,
+.form-group.success textarea,
+.success.field_with_errors textarea {
+  color: #468847;
+}
+
+.form-group.success input,
+.success.field_with_errors input,
+.form-group.success select,
+.success.field_with_errors select,
+.form-group.success textarea,
+.success.field_with_errors textarea {
+  border-color: #468847;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.form-group.success input:focus,
+.success.field_with_errors input:focus,
+.form-group.success select:focus,
+.success.field_with_errors select:focus,
+.form-group.success textarea:focus,
+.success.field_with_errors textarea:focus {
+  border-color: #356635;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7aba7b;
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7aba7b;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7aba7b;
+}
+
+.form-group.success .input-prepend .add-on,
+.success.field_with_errors .input-prepend .add-on,
+.form-group.success .input-append .add-on,
+.success.field_with_errors .input-append .add-on {
+  color: #468847;
+  background-color: #dff0d8;
+  border-color: #468847;
+}
+
+.form-group.info .control-label,
+.info.field_with_errors .control-label,
+.form-group.info .help-block,
+.info.field_with_errors .help-block,
+.form-group.info .help-inline,
+.info.field_with_errors .help-inline {
+  color: #3a87ad;
+}
+
+.form-group.info .checkbox,
+.info.field_with_errors .checkbox,
+.form-group.info .radio,
+.info.field_with_errors .radio,
+.form-group.info input,
+.info.field_with_errors input,
+.form-group.info select,
+.info.field_with_errors select,
+.form-group.info textarea,
+.info.field_with_errors textarea {
+  color: #3a87ad;
+}
+
+.form-group.info input,
+.info.field_with_errors input,
+.form-group.info select,
+.info.field_with_errors select,
+.form-group.info textarea,
+.info.field_with_errors textarea {
+  border-color: #3a87ad;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.form-group.info input:focus, 
+.info.field_with_errors input:focus,
+.form-group.info select:focus,
+.info.field_with_errors select:focus,
+.form-group.info textarea:focus,
+.info.field_with_errors textarea:focus {
+  border-color: #2d6987;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7ab5d3;
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7ab5d3;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7ab5d3
+}
+
+.form-group.info .input-prepend .add-on,
+.info.field_with_errors .input-prepend .add-on,
+.form-group.info .input-append .add-on,
+.info.field_with_errors .input-append .add-on {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #3a87ad;
+}
+  
+.form-horizontal .form-group:after,
+.form-horizontal .field_with_errors:after {
+  clear: both;
+}
+
+.table tbody tr.success > td {
+  background-color: #dff0d8; }
+.table tbody tr.error > td, .table tbody tr.field_with_errors > td {
+  background-color: #f2dede; }
+.table tbody tr.warning > td {
+  background-color: #fcf8e3; }
+.table tbody tr.info > td {
+  background-color: #d9edf7; }
+
+.table-hover tbody tr.success:hover > td {
+  background-color: #d0e9c6; }
+.table-hover tbody tr.error:hover > td, .table-hover tbody tr.field_with_errors:hover > td {
+  background-color: #ebcccc; }
+.table-hover tbody tr.warning:hover > td {
+  background-color: #faf2cc; }
+.table-hover tbody tr.info:hover > td {
+  background-color: #c4e3f3; }

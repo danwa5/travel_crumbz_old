@@ -1,11 +1,17 @@
 RailsMongoid::Application.routes.draw do
 
+  # Add comment from post show page
+  # match "posts/:post_id/comments", :action=>"create_comment_from_post", :via=>[:post], :controller=>"comments"
+
   resources :posts do
+    put :like
     resources :location  
     resources :comments  
   end
 
   root :to => redirect("/posts")
+
+  match '/countries', to: 'static_pages#countries', via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

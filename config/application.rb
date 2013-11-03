@@ -27,5 +27,7 @@ module RailsMongoid
 
     # for line below to take effect, need to run: rake assets:precompile RAILS_ENV=development
     config.assets.paths << "#{Rails}/vendor/assets/fonts"
+    
+    #config.action_view.field_error_proc = Proc.new { |html_tag, instance| "<span class='field_with_errors'>#{html_tag}</span>".html_safe }
   end
 end

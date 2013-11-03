@@ -12,6 +12,7 @@ gem 'mongoid', github: 'mongoid/mongoid'
 # maps
 gem 'geocoder', "~> 1.1.8"
 gem 'gmaps4rails', "~> 1.5.6"
+gem "geo-distance", "~> 0.2.0"
 
 # Other helpers
 gem 'country-select', "~> 1.1.1"

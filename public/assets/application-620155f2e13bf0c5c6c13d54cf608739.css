@@ -10,6 +10,7 @@
 
 /*! normalize.css v2.1.0 | MIT License | git.io/normalize */
 
+
 article,
 aside,
 details,
@@ -3807,7 +3808,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .nav > li > a {
   position: relative;
   display: block;
-  padding: 2px 12px; /* 10px 15px */
+  padding: 10px 15px;
 }
 
 .nav > li > a:hover,
@@ -3911,7 +3912,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .nav-pills > li > a {
   border-radius: 5px;
-  color: #1798a6; /* addition */
+  color: #ff6600; /* addition */
 }
 
 .nav-pills > li + li {
@@ -6804,3 +6805,234 @@ td.visible-print {
     display: none !important;
   }
 }
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+
+
+
+ */
+
+.form-horizontal {
+  margin-bottom: 60px; }
+
+#tile-1 h3,
+#tile-2 h3,
+#tile-3 h3,
+#tile-4 h3,
+#tile-5 h3,
+#tile-6 h3,
+#tile-7 h3,
+#tile-8 h3,
+#tile-9 h3 {
+  color: #fff; }
+#tile-1 h4,
+#tile-2 h4,
+#tile-3 h4,
+#tile-4 h4,
+#tile-5 h4,
+#tile-6 h4,
+#tile-7 h4,
+#tile-8 h4,
+#tile-9 h4 {
+  color: #ccc; }
+
+#tile-1,
+#tile-2,
+#tile-3,
+#tile-4,
+#tile-5,
+#tile-6,
+#tile-7,
+#tile-8,
+#tile-9,
+.tile-content {
+  height: 260px;
+  border-radius: 8px;
+  float: left;
+  margin-bottom: 5px;
+  padding: 15px;
+  color: white;
+  /*font-size: 21px;
+  font-weight: 200;
+  line-height: 2.1428571435;
+  color: inherit;*/ }
+
+.post-tile {
+  position: relative; }
+
+.tile-left {
+  margin-right: 5px; }
+
+.tile-content {
+  color: #000;
+  background-color: #FF6600;
+  opacity: 0.85;
+  display: none;
+  z-index: 10; }
+  .tile-content p {
+    font-weight: 500; }
+
+#tile-1 {
+  width: 441px;
+  background: url(/assets/testing/copenhagen.jpg); }
+
+#tile-2 {
+  width: 401px;
+  background: url(/assets/testing/sydney.jpg); }
+
+#tile-3 {
+  width: 180px;
+  background: url(/assets/testing/chocolisto.jpg); }
+
+#tile-4 {
+  width: 661px;
+  background: url(/assets/testing/cotopaxi.jpg); }
+
+#tile-5 {
+  width: 600px;
+  background: url(/assets/testing/argentina.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%; }
+
+#tile-6 {
+  width: 241px;
+  background: url(/assets/testing/chile.jpg); }
+
+#tile-7 {
+  width: 320px;
+  background: url(/assets/testing/guayaquil.jpg); }
+
+#tile-8 {
+  width: 521px;
+  background: url(/assets/testing/villarica.jpg); }
+
+#tile-9 {
+  width: 847px;
+  background: url(/assets/testing/patagonia.jpg);
+  background-position: right center; }
+
+#error_explanation {
+  color: #f00; }
+  #error_explanation ul {
+    list-style: none;
+    margin: 0 0 18px 0; }
+
+/*
+ * Bootstrap 3.0 Override
+ * --------------------------------------------------
+ */
+/*
+* Gmaps4Rails
+* --------------------------------------------------
+*/
+.map-container {
+  background-color: #fff; }
+
+/*
+ * Style twaks
+ * --------------------------------------------------
+ */
+body {
+  padding-top: 70px; }
+
+footer {
+  padding-left: 15px;
+  padding-right: 15px; }
+
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 768px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out; }
+
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -50%;
+    /* 6 columns */ }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -50%;
+    /* 6 columns */ }
+
+  .row-offcanvas-right.active {
+    right: 50%;
+    /* 6 columns */ }
+
+  .row-offcanvas-left.active {
+    left: 50%;
+    /* 6 columns */ }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    /* 6 columns */ } }
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px; }
+
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px; }
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px; }
+
+a {
+  color: #000; }
+  a:visited {
+    color: #666; }
+  a:hover {
+    color: #fff;
+    background-color: #000; }
+
+div.field, div.actions {
+  margin-bottom: 10px; }
+
+#notice {
+  color: green; }
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table; }
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0; }
+  #error_explanation h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff; }
+  #error_explanation ul li {
+    font-size: 12px;
+    list-style: square; }
