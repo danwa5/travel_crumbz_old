@@ -80,4 +80,4 @@ RailsMongoid::Application.configure do
 
   config.assets.debug = true
   config.assets.compile = true
-true
+end
