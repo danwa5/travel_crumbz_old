@@ -1,0 +1,33 @@
+<% provide(:title, "Sign in") %>
+<div class="page_header"><h1>Sign in</h1></div>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+
+    <%= form_for(:session, url: sessions_path, html: {class:"form-horizontal"}) do |f| %>
+      <%#= render 'shared/error_messages', object: f.object %>
+
+      <div class="form-group">
+        <%= f.label :email, nil, class: "col-sm-3 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :email, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password, nil, class: "col-md-3 control-label" %>
+        <div class="col-md-8">
+          <%= f.password_field :password, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-offset-5 col-md-5">
+          <%= f.submit "Sign in", class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+
+    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+  </div>
+</div>

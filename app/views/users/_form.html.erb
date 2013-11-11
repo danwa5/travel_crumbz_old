@@ -1,0 +1,81 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+
+    <%= form_for(@user, html: {class:"form-horizontal"}) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <fieldset>
+        <legend>Personal</legend>
+      </fieldset>
+
+      <div class="form-group">
+        <%= f.label :last_name, nil, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :last_name, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :first_name, nil, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :first_name, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email, nil, class: "col-md-4 control-label" %>
+        <div class="col-md-8">
+          <%= f.text_field :email, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password, nil, class: "col-md-4 control-label" %>
+        <div class="col-md-8">
+          <%= f.password_field :password, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation, "Confirmation", class: "col-md-4 control-label" %>
+        <div class="col-md-8">
+          <%= f.password_field :password_confirmation, class: "form-control" %>
+        </div>
+      </div>
+
+      <fieldset>
+        <legend>Settings</legend>
+      </fieldset>
+
+      <%= f.fields_for :preference do |pref| %>
+      <div class="form-group">
+        <%= pref.label :num_tiles, "# of Tiles", class: "col-md-4 control-label" %>
+        <div class="col-md-8">
+          <%= pref.select :num_tiles, tiles, {}, {class: "form-control"} %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= pref.label :sort_key, nil, class: "col-md-4 control-label" %>
+        <div class="col-md-8">
+          <%= pref.select :sort_key, sort_key, {}, {class: "form-control"} %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= pref.label :sort_order, nil, class: "col-md-4 control-label" %>
+        <div class="col-md-8">
+          <%= pref.select :sort_order, sort_order, {}, {class: "form-control"} %>
+        </div>
+      </div>
+      <% end %>
+
+      <div class="form-group">
+        <div class="col-md-offset-4 col-md-6">
+          <%= f.submit button_label, class: "btn btn-primary" %>
+          <%= link_to "Cancel", cancel_path, {class: "btn btn-primary", "data-no-turbolink" => true} %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

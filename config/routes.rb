@@ -3,6 +3,12 @@ RailsMongoid::Application.routes.draw do
   # Add comment from post show page
   # match "posts/:post_id/comments", :action=>"create_comment_from_post", :via=>[:post], :controller=>"comments"
 
+  resources :users do
+    resources :preference
+  end
+
+  resources :sessions, only: [:new, :create, :destroy]
+
   resources :posts do
     put :like
     resources :location  
@@ -11,6 +17,9 @@ RailsMongoid::Application.routes.draw do
 
   root :to => redirect("/posts")
 
+  match '/signup', to: 'users#new', via: 'get'
+  match '/signin', to: 'sessions#new', via: 'get'
+  match '/signout', to: 'sessions#destroy', via: 'delete'
   match '/countries', to: 'static_pages#countries', via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.

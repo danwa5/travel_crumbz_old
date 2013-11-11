@@ -12,18 +12,28 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%#= javascript_include_tag :defaults %>
-  <%= javascript_include_tag "jquery", "application" %>
+  <%#= javascript_include_tag "jquery", "application" %>
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
 </head>
 <body>
   <%= render 'layouts/header' %>
   <div class="container">
+    <div class="row row-offcanvas row-offcanvas-right">
+      <div class="col-xs-12 col-sm-9">
       
-    <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>"><%= value %></div>
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+      <%= yield %>
+
+      </div><!--/span-->
+
+    <% if signed_in? %>  
+      <%= render partial: 'layouts/sidebar' %>
     <% end %>
-    <%= yield %>
+
+    </div><!--/row-->
             
     <%= render 'layouts/footer' %>
     <%= debug(params) if Rails.env.development? %>

@@ -1,0 +1,80 @@
+<% provide(:title, @user.first_name + " " + @user.last_name) %>
+
+<div class="page_header"><h1>My Profile</h1></div>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <%= form_for(@user, html: {class:"form-horizontal"}) do |f| %>
+
+      <fieldset>
+        <legend>Personal</legend>
+      </fieldset>
+
+      <div class="form-group">
+        <%= f.label :last_name, nil, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :last_name, {class: "form-control", disabled: true} %>
+        </div>
+      </div>
+          
+      <div class="form-group">
+        <%= f.label :first_name, nil, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :first_name, {class: "form-control", disabled: true} %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email, nil, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-envelope"></span>
+            </span>
+            <%= f.text_field :email, {class: "form-control", disabled: true} %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :admin, nil, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-wrench"></span>
+            </span>
+            <%= f.text_field :admin, {class: "form-control", disabled: true} %>
+          </div>
+        </div>
+      </div>
+
+      <fieldset>
+        <legend>Settings</legend>
+      </fieldset>
+
+      <%= f.fields_for :preference do |pref| %>
+      <div class="form-group">
+        <%= pref.label :num_tiles, "Display tiles", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= pref.text_field :num_tiles, {class: "form-control", disabled: true} %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= pref.label :sort_key, nil, class: "col-md-4 control-label" %>
+        <div class="col-md-8">
+          <%= pref.select :sort_key, sort_key, {}, {class: "form-control", disabled: true} %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= pref.label :sort_order, nil, class: "col-md-4 control-label" %>
+        <div class="col-md-8">
+          <%= pref.select :sort_order, sort_order, {}, {class: "form-control", disabled: true} %>
+        </div>
+      </div>
+      <% end %>
+
+    <% end %><!-- form -->
+  </div>
+</div>

@@ -17,6 +17,35 @@ module ApplicationHelper
     end
   end
 
+  def date_short_format(date)
+    unless date.blank?
+      date.strftime("%m/%d/%Y")
+    end
+  end
+
+  ###################
+  #  Field Options  #
+  ###################
+
+  def tiles
+    [2, 4, 6, 8, 9]
+  end
+
+  def sort_key
+    [
+      ['Travel date','start_date'],
+      ['Entry post date','created_at'],
+      ['Likes count','likes']
+    ]
+  end
+
+  def sort_order
+    [
+      ['Ascending','ASC'],
+      ['Descending','DESC']
+    ]
+  end
+
   def countries
     [
       [''],

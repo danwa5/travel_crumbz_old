@@ -3,7 +3,9 @@ class Post
   include Mongoid::Timestamps
   include Mongoid::Attributes::Dynamic
   include ApplicationHelper
+  #include ActionView::Helpers
 
+  belongs_to :user
   embeds_many :comments
   embeds_one :location
   accepts_nested_attributes_for :location #, reject_if: lambda { |a| a[:country].blank? }, :allow_destroy => true
@@ -19,8 +21,11 @@ class Post
   field :end_date, type: Date
   field :likes, type: Integer
   field :loves, type: Integer
+  field :user_id, type: BSON::ObjectId
 
   index({ starred: 1 })
+  index({ remember_token: 1 })
+  index({ user_id: 1 })
 
   def get_dates
     String str = String.new
@@ -54,24 +59,42 @@ class Post
     end
   end
 
-  # Data access methods
+  #########################
+  #  Data access methods  #
+  #########################
 
-  def self.latest_posts
-    all.sort("created_at DESC").limit(10)
+  def self.latest_posts(user)
+    unless user.blank?
+      where(:user_id => user.id).sort("created_at DESC").limit(10)
+    end
   end
 
-  def self.posts_by_countries
-    project = {"$project" => {"location.country" => 1}}
-    group = {"$group" => {"_id" => {"country" => "$location.country"}, "posts_count" => {"$sum" => 1}}}
-    sort = {"$sort" => {"_id.country" => 1}}
-    collection.aggregate([project, group, sort])
+  def self.posts_by_countries(user)
+    unless user.blank?
+      match = {"$match" => {"user_id" => user.id}}
+      project = {"$project" => {"location.country" => 1}}
+      group = {"$group" => {"_id" => {"country" => "$location.country"}, "posts_count" => {"$sum" => 1}}}
+      sort = {"$sort" => {"_id.country" => 1}}
+      collection.aggregate([match, project, group, sort])
+    end
   end
 
-  def self.posts_by_country(country)
-    where("location.country" => country).sort("start_date DESC")
+  def self.posts_by_country(user, country)
+    unless user.blank?
+      where(:user_id => user.id,"location.country" => country).sort("start_date DESC")
+    end
   end
 
-  def self.starred_posts
-    where(starred: true).sort("start_date DESC")
+  def self.starred_posts(user)
+    unless user.blank?
+      user.preference.num_tiles.nil? ? limitCount = 9 : limitCount = user.preference.num_tiles
+      user.preference.sort_key.nil? ? sortKey = "start_date" : sortKey = user.preference.sort_key
+      user.preference.sort_order.nil? ? sortOrder = "DESC" : sortOrder = user.preference.sort_order
+
+      #where(:user_id.exists => true)
+      where(:user_id => user.id, :starred => true).sort(sortKey + " " + sortOrder).limit(limitCount)
+    end
+
   end
+
 end

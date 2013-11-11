@@ -1,0 +1,4 @@
+<% provide(:title, 'Edit Profile') %>
+<div class="page_header"><h1>Edit Profile</h1></div>
+
+<%= render partial: 'users/form', locals: { button_label: "Save Changes", cancel_path: user_path(@user) } %>

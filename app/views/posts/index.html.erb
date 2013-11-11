@@ -1,52 +1,46 @@
-<div class="row row-offcanvas row-offcanvas-right">
-  <div class="col-xs-12 col-sm-9">
-    <p class="pull-right visible-xs">
-      <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-    </p>
-    <div class="jumbotron">
-      <%= gmaps4rails(@pins) %>
-    </div>
+<p class="pull-right visible-xs">
+  <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+</p>
+<div class="jumbotron">
+  <%= gmaps4rails(@pins) %>
+</div>
     
-    <div class="row">
-      <div class="col-lg-12">
-      <!--div class="col-6 col-sm-6 col-lg-4"-->
+<div class="row">
+  <div class="col-lg-12">
+  <!--div class="col-6 col-sm-6 col-lg-4"-->
 
-      <% @posts.each_with_index do |post, index| %>
-        <div class="post-tile">
-          <div id="tile-<%= index+1 %>" class="<%= index%2==0 ? 'tile-left' : '' %>">
-            <h3><%= post.location.city %></h2>
-            <h4><%= post.location.country %></h4>
-          </div>
+  <% @posts.each_with_index do |post, index| %>
+    <div class="post-tile">
+      <div id="tile-<%= index+1 %>" class="<%= index%2==0 ? 'tile-left' : '' %>">
+        <h3><%= post.location.city %></h2>
+        <h4><%= post.location.country %></h4>
+      </div>
 
-          <div class="tile-content">
-            <h4><%= post.title %></h4>
-            <p><%= post.snippet(post.body) %></p>
-            <p><%= link_to 'Continue reading &raquo;'.html_safe, post, { class:"btn btn-default" } %></p>
-          </div>
-        </div>
-      <% end %>
+      <div class="tile-content">
+        <h4><%= post.title %></h4>
+        <p><%= post.snippet(post.body) %></p>
+        <p><%= link_to 'Continue reading &raquo;'.html_safe, post, { class:"btn btn-default" } %></p>
+      </div>
+    </div>
+  <% end %>
 
-      </div><!--/span-->
-    </div><!--/row-->
   </div><!--/span-->
-
-  <%= render partial: 'layouts/sidebar' %>
-  
 </div><!--/row-->
 
-      <hr>
-
-
-
+<hr>
 
 <%= yield :scripts %>
 
+<% if signed_in? %>
 <table>
   <thead>
     <tr>
-      <th>Title</th>
       <th>Location</th>
+      <th>Travel Date</th>
+      <th>Post Date</th>
       <th>Starred</th>
+      <th>Likes</th>
+      <th>Comments</th>
       <th></th>
       <th></th>
       <th></th>
@@ -56,9 +50,12 @@
   <tbody>
     <% @all_posts.each do |post| %>
       <tr>
-        <td><%= post.title %></td>
-        <td><%= post.location.address %></td>
+        <td><%= post.location.city_country %></td>
+        <td><%= date_short_format(post.start_date) %></td>
+        <td><%= date_short_format(post.created_at) %></td>
         <td><%= post.starred %></td>
+        <td><%= post.likes.nil? ? "--" : post.likes %></td>
+        <td><%= post.comments.count==0 ? "--" : post.comments.count %></td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -70,3 +67,4 @@
 <br>
 
 <%= link_to 'New Post', new_post_path %>
+<% end %>

@@ -1,5 +1,5 @@
 <% provide(:title, "New Post") %>
-<center><h1>New Post</h1></center>
+<div class="page_header"><h1>New Post</h1></div>
 
 <%= render partial: 'posts/form', locals: { button_label: "Add Post", cancel_path: post_path(@post) } %>
 

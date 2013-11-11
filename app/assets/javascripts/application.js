@@ -17,6 +17,8 @@
 //= require turbolinks
 //= require_tree .
 
+//$('.dropdown-toggle').dropdown()
+
 $(document).ready(function(){
 
   showAndHide($("#tile-1"));

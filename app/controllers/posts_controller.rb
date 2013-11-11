@@ -1,14 +1,14 @@
 class PostsController < ApplicationController
   include PostsHelper
-
+  #include SessionsHelper
+  
+  before_action :signed_in_user
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :get_latest_posts
-  before_action :get_posts_by_countries
 
   def index
-    @all_posts = Post.all.sort("start_date DESC")
+    @all_posts = Post.where(:user_id => @current_user).sort("start_date DESC")
 
-    @posts = Post.starred_posts
+    @posts = Post.starred_posts(@current_user)
     configure_posts_for_gmaps(@posts)
   end
 
@@ -22,7 +22,6 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    #@post.location.build
     @post.build_location
   end
 
@@ -30,7 +29,9 @@ class PostsController < ApplicationController
   end
 
   def create
+    
     @post = Post.new(post_params)
+    @post.user_id = @current_user.id
 
     respond_to do |format|
       if @post.save
@@ -50,7 +51,9 @@ class PostsController < ApplicationController
     #params[:start_date] = DateTime.new("2013","1","2")
 
     #respond_to do |format|
+    @post.user_id = @current_user.id
       if @post.update_attributes(post_params)
+
         flash[:success] = "Post successfully updated!"
         redirect_to @post
 
@@ -98,16 +101,8 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :body, :starred, :start_date, :end_date, :likes, :loves,
+      params.require(:post).permit(:user_id, :title, :body, :starred, :start_date, :end_date, :likes, :loves,
         location_attributes: [:id, :street, :city, :state, :country, :postal])
-    end
-
-    def get_latest_posts
-      @latest_posts = Post.latest_posts
-    end
-
-    def get_posts_by_countries
-      @countries = Post.posts_by_countries
     end
 
 end

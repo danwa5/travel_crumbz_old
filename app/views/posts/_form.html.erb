@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-8 col-md-offset-2">
 
   <%= form_for(@post, html: {class:"form-horizontal", role:"form"}) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
@@ -41,7 +41,7 @@
       <div class="col-md-offset-3 col-md-9">
         <div class="checkbox">
           <label>
-            <%= f.check_box :starred %> Tag in my <i>Favorite 9</i>
+            <%= f.check_box :starred %> Tag as a <i>Favorite</i>
           </label>
         </div>
       </div>

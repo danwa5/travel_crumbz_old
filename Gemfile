@@ -16,6 +16,7 @@ gem 'gmaps4rails', "~> 1.5.6"
 gem "geo-distance", "~> 0.2.0"
 
 # Other helpers
+gem 'bcrypt-ruby', '3.0.1'
 gem 'country-select', "~> 1.1.1"
 
 # Use SCSS for stylesheets
