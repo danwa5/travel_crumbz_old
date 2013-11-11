@@ -6,7 +6,7 @@ class User
 
   has_many :posts #, index: true
   embeds_one :preference
-  accepts_nested_attributes_for :preference
+  accepts_nested_attributes_for :preference #, :dependent => :destroy , :autosave => true
   validates_associated :preference
 
   before_save { self.email = email.downcase }

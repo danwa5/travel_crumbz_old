@@ -4,9 +4,11 @@
     <%= form_for(@user, html: {class:"form-horizontal"}) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
-      <fieldset>
-        <legend>Personal</legend>
-      </fieldset>
+      <% if !sign_up %>
+        <fieldset>
+          <legend>Personal</legend>
+        </fieldset>
+      <% end %>
 
       <div class="form-group">
         <%= f.label :last_name, nil, class: "col-sm-4 control-label" %>
@@ -43,31 +45,33 @@
         </div>
       </div>
 
-      <fieldset>
-        <legend>Settings</legend>
-      </fieldset>
+      <% if !sign_up %>
+        <fieldset>
+          <legend>Settings</legend>
+        </fieldset>
 
-      <%= f.fields_for :preference do |pref| %>
-      <div class="form-group">
-        <%= pref.label :num_tiles, "# of Tiles", class: "col-md-4 control-label" %>
-        <div class="col-md-8">
-          <%= pref.select :num_tiles, tiles, {}, {class: "form-control"} %>
+        <%= f.fields_for :preference do |pref| %>
+        <div class="form-group">
+          <%= pref.label :display_tiles, nil, class: "col-md-4 control-label" %>
+          <div class="col-md-8">
+            <%= pref.select :display_tiles, tiles, {}, {class: "form-control"} %>
+          </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <%= pref.label :sort_key, nil, class: "col-md-4 control-label" %>
-        <div class="col-md-8">
-          <%= pref.select :sort_key, sort_key, {}, {class: "form-control"} %>
+        <div class="form-group">
+          <%= pref.label :sort_key, nil, class: "col-md-4 control-label" %>
+          <div class="col-md-8">
+            <%= pref.select :sort_key, sort_key, {}, {class: "form-control"} %>
+          </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <%= pref.label :sort_order, nil, class: "col-md-4 control-label" %>
-        <div class="col-md-8">
-          <%= pref.select :sort_order, sort_order, {}, {class: "form-control"} %>
+        <div class="form-group">
+          <%= pref.label :sort_order, nil, class: "col-md-4 control-label" %>
+          <div class="col-md-8">
+            <%= pref.select :sort_order, sort_order, {}, {class: "form-control"} %>
+          </div>
         </div>
-      </div>
+        <% end %>
       <% end %>
 
       <div class="form-group">

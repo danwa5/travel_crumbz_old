@@ -87,14 +87,19 @@ class Post
 
   def self.starred_posts(user)
     unless user.blank?
-      user.preference.num_tiles.nil? ? limitCount = 9 : limitCount = user.preference.num_tiles
-      user.preference.sort_key.nil? ? sortKey = "start_date" : sortKey = user.preference.sort_key
-      user.preference.sort_order.nil? ? sortOrder = "DESC" : sortOrder = user.preference.sort_order
+      if user.preference?
+        sortKey = user.preference.sort_key
+        sortOrder = user.preference.sort_order
+        limitCount = user.preference.display_tiles
+      else
+        sortKey = "start_date"
+        sortOrder = "DESC"
+        limitCount = 9
+      end
 
       #where(:user_id.exists => true)
       where(:user_id => user.id, :starred => true).sort(sortKey + " " + sortOrder).limit(limitCount)
     end
-
   end
 
 end

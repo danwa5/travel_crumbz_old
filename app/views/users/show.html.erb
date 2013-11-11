@@ -54,9 +54,9 @@
 
       <%= f.fields_for :preference do |pref| %>
       <div class="form-group">
-        <%= pref.label :num_tiles, "Display tiles", class: "col-sm-4 control-label" %>
+        <%= pref.label :display_tiles, nil, class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
-          <%= pref.text_field :num_tiles, {class: "form-control", disabled: true} %>
+          <%= pref.text_field :display_tiles, {class: "form-control", disabled: true} %>
         </div>
       </div>
 

@@ -29,7 +29,6 @@ class PostsController < ApplicationController
   end
 
   def create
-    
     @post = Post.new(post_params)
     @post.user_id = @current_user.id
 
@@ -45,25 +44,13 @@ class PostsController < ApplicationController
   end
 
   def update
-    #s_date = params[:start_date]
-    #:start_date = Date.new(s_date["start_date(1i)"], s_date["start_date(2i)"], s_date["start_date(3i)"])
-    #params[:start_date] = Date.new(s_date[:year].to_i, s_date[:month].to_i, s_date[:day].to_i)
-    #params[:start_date] = DateTime.new("2013","1","2")
-
-    #respond_to do |format|
-    @post.user_id = @current_user.id
-      if @post.update_attributes(post_params)
-
-        flash[:success] = "Post successfully updated!"
-        redirect_to @post
-
-        #format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        #format.json { head :no_content }
-      else
-        render action: 'edit'
-        #format.html { render action: 'edit' }
-      end
-    #end
+    #@post.user_id = @current_user.id
+    if @post.update_attributes(post_params)
+      flash[:success] = "Post successfully updated!"
+      redirect_to @post
+    else
+      render action: 'edit'
+    end
   end
 
   def destroy

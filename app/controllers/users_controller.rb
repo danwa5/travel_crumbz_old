@@ -20,6 +20,8 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(user_params)
+    @user.preference = {}
+
     if @user.save
       sign_in @user
       flash[:success] = "Welcome to Travel Crumbz!"
@@ -55,7 +57,7 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:last_name, :first_name, :email, :admin,
                                    :remember_token, :password, :password_confirmation, 
-                                   preference_attributes: [:id, :num_tiles, :sort_key, :sort_order])
+                                   preference_attributes: [:id, :display_tiles, :sort_key, :sort_order])
     end
     
     # Before filters
