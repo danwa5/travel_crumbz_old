@@ -9,7 +9,7 @@ class Post
   embeds_many :comments
   embeds_one :location
   accepts_nested_attributes_for :location #, reject_if: lambda { |a| a[:country].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :comments
+  accepts_nested_attributes_for :comments #, :dependent => :destroy , :autosave => true
 
   validates_presence_of :title, :body
   validates_associated :location
