@@ -1,25 +1,20 @@
 class CommentsController < ApplicationController
   before_action :load_post
+  before_action :signed_in_user
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
-  # GET /comments
-  # GET /comments.json
   def index
     @comments = @post.comments.all
   end
 
-  # GET /comments/1
-  # GET /comments/1.json
   def show
   end
 
-  # GET /comments/new
   def new
     #@comment = Comment.new
     @comment = @post.comments.build
   end
 
-  # GET /comments/1/edit
   def edit
   end
 
@@ -27,6 +22,8 @@ class CommentsController < ApplicationController
     #@comment = Comment.new(comment_params)
     @comment = @post.comments.build(comment_params)
     @comment.rating = params[:score]
+    @comment.post_id = @post.id
+    @comment.user_id = @current_user.id
 
     if (@comment.save)
       flash[:success] = "Comment successfully added to post!"
@@ -37,15 +34,15 @@ class CommentsController < ApplicationController
     redirect_to @post
   end
 
-  # PATCH/PUT /comments/1
-  # PATCH/PUT /comments/1.json
   def update
     @comment.rating = params[:score]
 
     respond_to do |format|
+      #@comment.post_id = @post.id
+      #@comment.user_id = @current_user.id
       if @comment.update_attributes(comment_params)
         flash[:success] = "Comment successfully updated!"
-        format.html { redirect_to @post, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to @post }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -73,7 +70,7 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:rating, :body)
+      params.require(:comment).permit(:rating, :body, :post_id, :user_id)
     end
 
     def load_post

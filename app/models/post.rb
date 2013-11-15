@@ -6,7 +6,7 @@ class Post
   #include ActionView::Helpers
 
   belongs_to :user
-  embeds_many :comments
+  has_many :comments
   embeds_one :location
   accepts_nested_attributes_for :location #, reject_if: lambda { |a| a[:country].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :comments #, :dependent => :destroy , :autosave => true

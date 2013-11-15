@@ -13,7 +13,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    get_city_avg_rating(@post.location.city)
+    get_post_avg_rating(@post)
 
     lat2 = @post.location.coordinates[1]
     lng2 = @post.location.coordinates[0]
@@ -79,11 +79,10 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
-    def get_city_avg_rating(city)
-      match = {"$match" => {"location.city" => city}}
-      unwind = {"$unwind" => "$comments"}
-      group = {"$group" => {"_id" => {"city" => "$location.city", "country" => "$location.country"}, "avg_rating" => {"$avg" => "$comments.rating"}}}
-      @city_avg_rating = Post.collection.aggregate([match, unwind, group])
+    def get_post_avg_rating(post)
+      match = {"$match" => {"post_id" => post.id}}
+      group = {"$group" => {"_id" => "$post_id", "avg_rating" => {"$avg" => "$rating"}}}
+      @post_avg_rating = Comment.collection.aggregate([match, group])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

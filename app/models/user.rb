@@ -5,6 +5,7 @@ class User
   include ActiveModel::SecurePassword
 
   has_many :posts #, index: true
+  has_many :comments
   embeds_one :preference
   accepts_nested_attributes_for :preference #, :dependent => :destroy , :autosave => true
   validates_associated :preference

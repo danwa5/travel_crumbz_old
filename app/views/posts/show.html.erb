@@ -44,14 +44,18 @@
 
     <p>
       <strong>Comments (<%= @post.comments.count %>)</strong><br/>
-      <span class="avg_star"></span> (<%= @city_avg_rating.size==0 ? "n/a" : @city_avg_rating[0]["avg_rating"] %>)<br/><br/>
+      <span class="avg_star"></span> (<%= @post_avg_rating.size==0 ? "n/a" : @post_avg_rating[0]["avg_rating"] %>)<br/><br/>
 
-      <% @post.comments.each_with_index do |c, index| %>
+      <% @post.comments.each_with_index do |comment, index| %>
         <blockquote>
           <ul class="post-comments">
             <li><span class="star<%= index %>"></span></li>
-            <li><%= c.body %></li>
-            <li class="commented-by">Commented on <%= c.get_create_date %> by __________ <%= link_to "edit", edit_post_comment_path(@post, c) %></li>
+            <li><%= comment.body %></li>
+            <li class="commented-by">Commented on <%= comment.get_create_date %> by <%= comment.user.name %> 
+
+            <% if current_user == comment.user %>
+              (<%= link_to "Edit", edit_post_comment_path(@post, comment) %>)
+            <% end %>
           </ul>
         </blockquote>
       <% end %>
@@ -81,8 +85,8 @@
       </div>
     </div>
 
-    <%= link_to 'Edit', edit_post_path(@post) %> |
-    <%= link_to 'Back', posts_path, {"data-no-turbolink" => true} %>   
+    <br/>
+    <%= link_to 'Edit Post', edit_post_path(@post) %> |
 
   <!--/div--><!--/span-->
 
@@ -96,7 +100,7 @@
   });
 
   $('.avg_star').raty({
-    score: <%= @post.comments.count == 0 ? 0 : @city_avg_rating[0]["avg_rating"] %>,
+    score: <%= @post.comments.count == 0 ? 0 : @post_avg_rating[0]["avg_rating"] %>,
     readOnly: true
   });
 
