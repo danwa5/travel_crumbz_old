@@ -26,38 +26,4 @@ class GridfsController < ApplicationController
     end
   end
 
-  # def serve
-  #   content = @user.avatar.read
-  #   if stale?(etag: content, last_modified: @user.updated_at.utc, public: true)
-  #    send_data content, type: @user.avatar.file.content_type, disposition: "inline"
-  #    expires_in 0, public: true
-  #   end
-  # end
-
-  # def serve
-  #   gridfs_path = env["PATH_INFO"].gsub("/images/", "")
-  #   begin
-  #     gridfs_file = Mongo::GridFileSystem.new(Mongoid.database).open(gridfs_path, 'r')
-  #     self.response_body = gridfs_file.read
-  #     self.content_type = gridfs_file.content_type
-  #   rescue
-  #     self.status = :file_not_found
-  #     self.content_type = 'text/plain'
-  #     self.response_body = ''
-  #   end
-  # end
-
-  # def serve
-  #   gridfs_path = env["PATH_INFO"].gsub("/gfs/", "")
-  #   begin
-  #     gridfs_file = Mongoid::GridFS[gridfs_path]
-  #     self.response_body = gridfs_file.data
-  #     self.content_type = gridfs_file.content_type
-  #   rescue
-  #     self.status = :file_not_found
-  #     self.content_type = 'text/plain'
-  #     self.response_body = ''
-  #   end
-  # end
-
 end

@@ -22,6 +22,30 @@
   }
 }
 
+ul.post-comments {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li.section {
+  font-family: 'Trebuchet MS', Helvetica, sans-serif;
+  font-size: 14px;
+  color: #999999;  
+}
+
+li.commented-by {
+  color: #999999;
+}
+
+.new-comment {
+  background-color: #dddddd;
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 0px;
+  border-radius: 8px;
+}
+
 textarea {
   resize: vertical;
 }
@@ -131,49 +155,49 @@ textarea {
 
 #tile-1 {
   width: 441px;
-  background:url(/assets/testing/copenhagen.jpg);
+  background:url(copenhagen.jpg);
 }
 
 #tile-2 {
   width: 401px;
-  background:url(/assets/testing/sydney.jpg);
+  background:url(sydney.jpg);
 }
 
 #tile-3 {
   width: 180px;
-  background:url(/assets/testing/chocolisto.jpg);
+  background:url(chocolisto.jpg);
 }
 
 #tile-4 {
   width: 661px;
-  background:url(/assets/testing/cotopaxi.jpg);
+  background:url(cotopaxi.jpg);
 }
 
 #tile-5 {
   width: 600px;
-  background:url(/assets/testing/argentina.jpg);
+  background:url(argentina.jpg);
   background-repeat:no-repeat;
   background-size: 100%;
 }
 
 #tile-6 {
   width: 241px;
-  background:url(/assets/testing/chile.jpg);
+  background:url(chile.jpg);
 }
 
 #tile-7 {
   width: 320px;
-  background:url(/assets/testing/guayaquil.jpg);
+  background:url(guayaquil.jpg);
 }
 
 #tile-8 {
   width: 521px;
-  background:url(/assets/testing/villarica.jpg);
+  background:url(villarica.jpg);
 }
 
 #tile-9 {
   width: 847px;
-  background:url(/assets/testing/patagonia.jpg);
+  background:url(patagonia.jpg);
   background-position:right center;
 }
 

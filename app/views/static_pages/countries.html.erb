@@ -9,7 +9,7 @@
 <% @posts.each_with_index do |post, index| %>
   <div class="row entry">
     <div class="col-xs-3 entry-image">
-      <%= link_to image_tag("/assets/testing/trees.jpg"), post %>
+      <%= link_to image_tag("trees.jpg"), post %>
     </div>
     <div class="col-xs-9 entry-content">
       <h3><%= link_to post.title, post %></h3>

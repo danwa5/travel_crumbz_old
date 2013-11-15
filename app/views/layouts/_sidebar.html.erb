@@ -13,7 +13,7 @@
   <div class="well sidebar-nav">
     <ul class="nav nav-pills nav-stacked">
     <% if signed_in? %>
-      <li>Latest Entries</li>
+      <li class="section">LATEST ENTRIES</li>
     <% if @latest_posts.count == 0 %>
       <li>No entries found</li>
     <%
@@ -22,8 +22,9 @@
     %>
       <li><%= link_to p.title, p %></li>
     <% end end %>
+
       <li class="nav nav-divider"></li>
-      <li>Entries by Country</li>
+      <li class="section">ENTRIES BY COUNTRY</li>
     <% if @countries.count == 0 %>
       <li>No entries found</li>
     <%
@@ -32,8 +33,23 @@
     %>
       <li><%= link_to c["_id"]["country"] + " (" + c["posts_count"].to_s + ")", {:action => "countries", :controller => "static_pages", :query => c["_id"]["country"]}, {"data-no-turbolink" => true} %></li>
     <% end end %>
+
       <li class="nav nav-divider"></li>
-      <li>Destination Facts</li>
+      <li class="section">ARCHIVE</li>
+    <% if @archives.count == 0 %>
+      <li>No entries found</li>
+    <%
+      else
+        @archives.each do |a|
+    %>
+      <li><a href="#entries_by_date"><%= a["_id"]["month"].to_s + "/" + a["_id"]["year"].to_s + " (" + a["posts_count"].to_s + ")" %></a></li>
+    <% end end %>
+
+      <li class="nav nav-divider"></li>
+      <li class="section">DESTINATION FACTS</li>
+      <li># of Countries</li>
+      <li># of Continents</li>
+      <li>Total distance travelled</li>
       <li>Furthest North...</li>
       <li>Farthest South...</li>
       <li>Farthest West...</li>

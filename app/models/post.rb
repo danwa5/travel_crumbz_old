@@ -79,6 +79,15 @@ class Post
     end
   end
 
+  def self.posts_by_travel_date(user)
+    unless user.blank?
+      match = {"$match" => {"user_id" => user.id}}
+      group = {"$group" => {"_id" => {"year" => {"$year" =>"$start_date"}, "month" => {"$month" => "$start_date"}}, "posts_count" => {"$sum" => 1}}}
+      sort = {"$sort" => {"_id.year" => -1, "_id.month" => -1}}
+      collection.aggregate([match, group, sort])
+    end
+  end
+
   def self.posts_by_country(user, country)
     unless user.blank?
       where(:user_id => user.id,"location.country" => country).sort("start_date DESC")
