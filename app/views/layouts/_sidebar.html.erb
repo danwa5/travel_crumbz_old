@@ -1,19 +1,40 @@
 <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
   <div class="well sidebar-nav">
+    <div id="about-me-container">
+    <% if @current_user.avatar.present? %>
+      <%= image_tag(@current_user.avatar.url, :class => 'avatar') %>
+    <% else %>
+      <%= image_tag("missing_avatar.jpg", :class => 'avatar') %>
+    <% end %>
+      <p class="about-me"><%= @current_user.about_me %></p>
+    </div>
+  </div>
+
+  <div class="well sidebar-nav">
     <ul class="nav nav-pills nav-stacked">
     <% if signed_in? %>
       <li>Latest Entries</li>
-    <% @latest_posts.each do |p| %>
+    <% if @latest_posts.count == 0 %>
+      <li>No entries found</li>
+    <%
+      else
+        @latest_posts.each do |p|
+    %>
       <li><%= link_to p.title, p %></li>
-    <% end %>
+    <% end end %>
       <li class="nav nav-divider"></li>
       <li>Entries by Country</li>
-    <% @countries.each do |c| %>
+    <% if @countries.count == 0 %>
+      <li>No entries found</li>
+    <%
+      else
+        @countries.each do |c|
+    %>
       <li><%= link_to c["_id"]["country"] + " (" + c["posts_count"].to_s + ")", {:action => "countries", :controller => "static_pages", :query => c["_id"]["country"]}, {"data-no-turbolink" => true} %></li>
-    <% end %>
+    <% end end %>
       <li class="nav nav-divider"></li>
       <li>Destination Facts</li>
-      <li>Farthese North...</li>
+      <li>Furthest North...</li>
       <li>Farthest South...</li>
       <li>Farthest West...</li>
       <li>Farthest East...</li>

@@ -10,14 +10,19 @@ gem 'bson_ext'
 gem 'mongo'
 gem 'mongoid', github: 'mongoid/mongoid'
 
-# maps
+# Maps
 gem 'geocoder', "~> 1.1.8"
 gem 'gmaps4rails', "~> 1.5.6"
 gem "geo-distance", "~> 0.2.0"
 
+# Image uploader and processing
+gem 'carrierwave-mongoid', "~> 0.6.3"
+gem 'mongoid-grid_fs', github: 'ahoward/mongoid-grid_fs'
+gem "mini_magick", "~> 3.6.0"
+
 # Other helpers
 gem 'bcrypt-ruby', '3.0.1'
-gem 'country-select', "~> 1.1.1"
+# gem 'country-select', "~> 1.1.1"
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

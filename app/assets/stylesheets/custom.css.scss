@@ -22,6 +22,10 @@
   }
 }
 
+textarea {
+  resize: vertical;
+}
+
 .entry {
   margin-bottom: 30px;
 }
@@ -45,6 +49,28 @@
     margin-bottom: 3px;
   }
 }
+
+/*
+ * About Me
+ * --------------------------------------------------
+ */
+
+#about-me-container {
+  display: inline-block;
+  width: 100%;
+}
+
+.avatar {
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 2px;
+}
+
+.about-me {
+  color: #999999;
+  font-size: 12px;
+}
+
 
 /*
  * Homepage Photo Tiling
@@ -151,7 +177,7 @@
   background-position:right center;
 }
 
- /*
+/*
  * Gmaps4Rails
  * --------------------------------------------------
  */

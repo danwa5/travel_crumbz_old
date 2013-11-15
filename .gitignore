@@ -25,4 +25,5 @@ doc/
 .secret
 bundler_stubs/
 /app/assets/images/testing/
+/public/uploads/
 

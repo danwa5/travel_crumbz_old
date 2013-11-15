@@ -5,6 +5,7 @@ RailsMongoid::Application.routes.draw do
 
   resources :users do
     resources :preference
+    #get :avatar, on: :member
   end
 
   resources :sessions, only: [:new, :create, :destroy]
@@ -21,6 +22,12 @@ RailsMongoid::Application.routes.draw do
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
   match '/countries', to: 'static_pages#countries', via: 'get'
+
+  match '/gfs/:model/:field/:user_id/:filename', to: 'gridfs#serve', via: 'get'
+  # match '/gfs/:model/:field/:fid/:handle', to: 'gridfs#serve', via: 'get', handle: /.*/
+  # match '/files/*path', to: "gridfs#serve", via: 'get'
+  # match '/images/user/avatar/:id/:filename', to: 'users#serve', via: 'get'
+  # match '/images/user/avatar/:id/:filename' => 'users#thumb_avatar', constraints: { filename: /thumb.*/ }
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

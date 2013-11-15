@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
 
-    <%= form_for(@user, html: {class:"form-horizontal"}) do |f| %>
+    <%= form_for(@user, html: {:multipart => true, class:"form-horizontal"}) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
       <% if !sign_up %>
@@ -30,6 +30,22 @@
           <%= f.text_field :email, class: "form-control" %>
         </div>
       </div>
+
+    <% if !sign_up %>
+      <div class="form-group">
+        <%= f.label :avatar, nil, class: "col-md-4 control-label" %>
+        <div class="col-md-8">
+          <%= f.file_field :avatar, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :about_me, nil, class: "col-md-4 control-label" %>
+        <div class="col-md-8">
+          <%= f.text_field :about_me, class: "form-control" %>
+        </div>
+      </div>
+    <% end %>
 
       <div class="form-group">
         <%= f.label :password, nil, class: "col-md-4 control-label" %>

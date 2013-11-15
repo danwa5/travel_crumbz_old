@@ -8,6 +8,7 @@ class User
   embeds_one :preference
   accepts_nested_attributes_for :preference #, :dependent => :destroy , :autosave => true
   validates_associated :preference
+  mount_uploader :avatar, AvatarUploader
 
   before_save { self.email = email.downcase }
   before_create :create_remember_token
@@ -15,6 +16,7 @@ class User
   field :last_name, type: String
   field :first_name, type: String
   field :email, type: String
+  field :about_me, type: String
   field :password, type: String
   field :password_digest, type: String
   field :remember_token, type: String

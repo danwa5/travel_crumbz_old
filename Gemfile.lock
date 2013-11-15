@@ -1,6 +1,14 @@
 GIT
+  remote: git://github.com/ahoward/mongoid-grid_fs.git
+  revision: 059012a2c2a9e0a5d6e67137752c3e918689c88a
+  specs:
+    mongoid-grid_fs (1.9.0)
+      mime-types (~> 1.19)
+      mongoid (>= 3.0, < 5.0)
+
+GIT
   remote: git://github.com/mongoid/mongoid.git
-  revision: 57264eff1df0e52c32e700f797a6c15222830b50
+  revision: 32a9ced358ff2f279ccefe0afaa9e0878628b7ff
   specs:
     mongoid (4.0.0)
       activemodel (~> 4.0.0)
@@ -41,6 +49,14 @@ GEM
     bson (2.0.0.rc3)
     bson_ext (1.5.1)
     builder (3.1.4)
+    carrierwave (0.9.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+    carrierwave-mongoid (0.6.3)
+      carrierwave (>= 0.8.0, < 0.10.0)
+      mongoid (>= 3.0, < 5.0)
+      mongoid-grid_fs (~> 1.3)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -80,6 +96,8 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25)
+    mini_magick (3.6.0)
+      subexec (~> 0.2.1)
     minitest (4.7.5)
     mongo (1.3.1)
       bson (>= 1.3.1)
@@ -132,6 +150,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    subexec (0.2.3)
     sugar-high (0.4.6.4)
     thor (0.18.1)
     thread_safe (0.1.3)
@@ -140,10 +159,10 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (1.3.0)
+    turbolinks (1.3.1)
       coffee-rails
     tzinfo (0.3.38)
-    uglifier (2.3.0)
+    uglifier (2.3.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
 
@@ -154,6 +173,7 @@ DEPENDENCIES
   bcrypt-ruby (= 3.0.1)
   bson
   bson_ext
+  carrierwave-mongoid (~> 0.6.3)
   coffee-rails (~> 4.0.0)
   country-select (~> 1.1.1)
   geo-distance (~> 0.2.0)
@@ -161,8 +181,10 @@ DEPENDENCIES
   gmaps4rails (~> 1.5.6)
   jbuilder (~> 1.2)
   jquery-rails
+  mini_magick (~> 3.6.0)
   mongo
   mongoid!
+  mongoid-grid_fs!
   rails (= 4.0.0)
   rails_12factor (= 0.0.2)
   sass-rails (~> 4.0.0)
