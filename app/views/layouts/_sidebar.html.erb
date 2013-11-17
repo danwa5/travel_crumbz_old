@@ -42,7 +42,7 @@
       else
         @archives.each do |a|
     %>
-      <li><a href="#entries_by_date"><%= a["_id"]["month"].to_s + "/" + a["_id"]["year"].to_s + " (" + a["posts_count"].to_s + ")" %></a></li>
+      <li><%= link_to months[a["_id"]["month"].to_s] + " " + a["_id"]["year"].to_s + " (" + a["posts_count"].to_s + ")", {:action => "archive", :controller => "static_pages", :month => a["_id"]["month"], :year => a["_id"]["year"]}, {"data-no-turbolink" => true} %></a></li>
     <% end end %>
 
       <li class="nav nav-divider"></li>

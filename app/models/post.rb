@@ -3,7 +3,6 @@ class Post
   include Mongoid::Timestamps
   include Mongoid::Attributes::Dynamic
   include ApplicationHelper
-  #include ActionView::Helpers
 
   belongs_to :user
   has_many :comments
@@ -59,6 +58,14 @@ class Post
     end
   end
 
+  def self.get_first_day_of_month(month, year)
+    Time.new(year, month, 1)
+  end
+
+  def self.get_last_day_of_month(month, year)
+    Time.new(year, (month.to_i + 1) , 1) - 1
+  end
+
   #########################
   #  Data access methods  #
   #########################
@@ -79,12 +86,26 @@ class Post
     end
   end
 
-  def self.posts_by_travel_date(user)
+  def self.posts_by_travel_dates(user)
     unless user.blank?
       match = {"$match" => {"user_id" => user.id}}
       group = {"$group" => {"_id" => {"year" => {"$year" =>"$start_date"}, "month" => {"$month" => "$start_date"}}, "posts_count" => {"$sum" => 1}}}
       sort = {"$sort" => {"_id.year" => -1, "_id.month" => -1}}
       collection.aggregate([match, group, sort])
+    end
+  end
+
+  def self.posts_by_travel_date(user, month, year)
+    unless user.blank? || month.blank? || year.blank?
+      # match1 = { "$match" => {"user_id" => user.id, "start_date" => {"$exists" => true}} }
+      # project = { "$project" => {"user_id" => 1, "title" => 1, "body" => 1, "starred" => 1, "created_at" => 1, "updated_at" => 1, "start_date" => 1, "end_date" => 1, "location" => 1, "month" => {"$month" => "$start_date"}, "year" => {"$year" => "$start_date"}} }
+      # match2 = { "$match" => {"month" => 5, "year" => 2013}}
+      # sort = {"$sort" => {"start_date" => -1}}
+      # Post.collection.aggregate([match1, project, match2])
+
+      firstDay = get_first_day_of_month(month,year)
+      lastDay = get_last_day_of_month(month,year)
+      where(:user_id => user.id).and(:start_date => {"$gte" => firstDay}).and("start_date" => {"$lte" => lastDay}).sort("start_date DESC")
     end
   end
 

@@ -20,6 +20,8 @@
               Account <b class="caret"></b>
             </a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="account">
+              <li role="presentation"><%= link_to "Add Post", new_post_path %></li>
+              <li class="divider"></li>
               <li role="presentation"><%= link_to "Profile", current_user %></li>
               <li role="presentation"><%= link_to "Settings", edit_user_path(current_user) %></li>
               <li class="divider"></li>

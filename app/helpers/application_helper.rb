@@ -23,6 +23,30 @@ module ApplicationHelper
     end
   end
 
+  def valid_month(month)
+    if month.blank?
+      return false
+    else
+      if month.to_i.between?(1,12)
+        return true
+      else
+        return false
+      end
+    end
+  end
+
+  def valid_year(year)
+    if year.blank?
+      return false
+    else
+      if year.to_i.between?(1900,2013)
+        return true
+      else
+        return false
+      end
+    end
+  end
+
   ###################
   #  Field Options  #
   ###################
@@ -44,6 +68,23 @@ module ApplicationHelper
       ['Ascending','ASC'],
       ['Descending','DESC']
     ]
+  end
+
+  def months
+    {
+      '1' => 'Jan',
+      '2' => 'Feb',
+      '3' => 'Mar',
+      '4' => 'Apr',
+      '5' => 'May',
+      '6' => 'Jun',
+      '7' => 'Jul',
+      '8' => 'Aug',
+      '9' => 'Sep',
+      '10' => 'Oct',
+      '11' => 'Nov',
+      '12' => 'Dec'
+    }
   end
 
   def countries

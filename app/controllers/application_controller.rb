@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   before_action :get_latest_posts
   before_action :get_posts_by_countries
-  before_action :get_posts_by_travel_date
+  before_action :get_posts_by_travel_dates
 
   def get_latest_posts
     @latest_posts = Post.latest_posts(self.current_user)
@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     @countries = Post.posts_by_countries(self.current_user)
   end
 
-  def get_posts_by_travel_date
-    @archives = Post.posts_by_travel_date(self.current_user)
+  def get_posts_by_travel_dates
+    @archives = Post.posts_by_travel_dates(self.current_user)
   end
 end

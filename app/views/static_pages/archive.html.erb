@@ -1,0 +1,23 @@
+<% provide(:title, "Entries in " + @month + "/" + @year) %>
+
+<div class="jumbotron">
+  <%= gmaps4rails(@pins) %>
+</div>
+
+<div class="page_header"><h1>Entries in <%= @month %>/<%= @year %> </h1></div>
+
+<% @posts_d.each_with_index do |post, index| %>
+  <div class="row entry">
+    <div class="col-xs-3 entry-image">
+      <%= link_to image_tag("trees.jpg"), post %>
+    </div>
+    <div class="col-xs-9 entry-content">
+      <h3><%= link_to post.title, post %></h3>
+      <h4><small><%= post.get_dates %> in <%= post.location.city %></small></h4>
+      <p><%= post.snippet_by_words(post.body, 50) %></p>          
+      <p><%= post.likes.nil? ? "0" : post.likes %> likes | <%= post.comments.count %> comments</p>
+    </div>
+  </div>
+<% end %>
+
+<%= yield :scripts %>
