@@ -1,0 +1,75 @@
+<p class="pull-right visible-xs">
+  <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+</p>
+
+<div class="row">
+  <div class="col-md-12">
+
+    <h2>Friends (<%= @friends.count %>)</h2>
+
+  <% if @friends.any? %>
+    <% @current_user.friendships.each_with_index do |friendship, index| %>
+      <%= index%6 == 0 ? "<div class='row'>".html_safe : "" %>
+
+      <div class="col-md-2 profile-index">
+        <%= image_tag(friendship.acceptor.get_avatar_path) %><br/>
+        <%= friendship.acceptor.name %><br/>
+        <%= link_to "Delete Friend", friendship, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+
+      <%= (index+1)%6 == 0 || (index+1) == @friends.length ? "</div>".html_safe : "" %>
+    <% end %>
+  <% else %>
+    <div class="message">You have no friends</div>
+  <% end %>
+
+  </div><!--/span-->
+</div><!--/row-->
+    
+<div class="row">
+  <div class="col-md-12">
+
+    <h2>Friended By (<%= @friended_by.count %>)</h2>
+
+  <% if @friended_by.any? %>
+    <% @current_user.inverse_friendships.each_with_index do |friendship, index| %>
+      <%= index%6 == 0 ? "<div class='row'>".html_safe : "" %>
+
+      <div class="col-md-2 profile-index">
+        <%= image_tag(friendship.requester.get_avatar_path) %><br/>
+        <%= friendship.requester.name %><br/>
+        <%= link_to "Delete Friend", friendship, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+
+      <%= (index+1)%6 == 0 || (index+1) == @friended_by.length ? "</div>".html_safe : "" %>
+    <% end %>
+  <% else %>
+    <div class="message">No one wants to be your friend</div>
+  <% end %>
+
+  </div><!--/span-->
+</div><!--/row-->
+    
+<div class="row">
+  <div class="col-md-12">
+
+    <h2>Strangers (<%= @strangers.count %>)</h2>
+
+  <% if @strangers.any? %>
+    <% @strangers.each_with_index do |stranger, index| %>
+      <%= index%6 == 0 ? "<div class='row'>".html_safe : "" %>
+
+      <div class="col-md-2 profile-index">
+        <%= image_tag(stranger.get_avatar_path) %><br/>
+        <%= stranger.name %><br/>
+        <%= link_to "Add Friend", friendships_path(:user_id => stranger.id), method: :post %>
+      </div>
+
+      <%= (index+1)%6 == 0 || (index+1) == @strangers.length ? "</div>".html_safe : "" %>
+    <% end %>
+  <% else %>
+    <div class="message">You are friends with everybody</div>
+  <% end %>
+
+  </div><!--/span-->
+</div><!--/row-->

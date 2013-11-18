@@ -1,11 +1,23 @@
 class UsersController < ApplicationController
 
   before_action :signed_in_user, except: [:new, :create]
-  before_action :correct_user,   only: [:edit, :update]
+  before_action :correct_user,   only: [:show, :edit, :update]
   before_action :admin_user,     only: [:destroy]
 
   def index
-    @users = User.all
+    @users= User.excludes(:id => @current_user.id)
+
+    @friends = Array.new
+    current_user.friendships.each do |friendship|
+      @friends << friendship.acceptor
+    end
+
+    @friended_by = Array.new
+    current_user.inverse_friendships.each do |inv_friendship|
+      @friended_by << inv_friendship.requester
+    end
+    
+    @strangers = @users - @friends - @friended_by
     #users = User.paginate(page: params[:page])
   end
   

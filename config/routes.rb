@@ -7,6 +7,8 @@ RailsMongoid::Application.routes.draw do
     resources :preference
   end
 
+  resources :friendships, only: [:create, :destroy]
+
   resources :sessions, only: [:new, :create, :destroy]
 
   resources :posts do

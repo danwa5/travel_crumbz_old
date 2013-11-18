@@ -4,9 +4,12 @@ class User
   include Mongoid::Attributes::Dynamic
   include ActiveModel::SecurePassword
 
-  has_many :posts #, index: true
-  has_many :comments
   embeds_one :preference
+  has_many :posts
+  has_many :comments
+  has_many :friendships, class_name: "Friendship", inverse_of: :requester
+  has_many :inverse_friendships, class_name: "Friendship", inverse_of: :acceptor
+ 
   accepts_nested_attributes_for :preference #, :dependent => :destroy , :autosave => true
   validates_associated :preference
   mount_uploader :avatar, AvatarUploader
@@ -43,6 +46,22 @@ class User
   
   def name
     first_name + " " + last_name
+  end
+
+  def get_avatar
+    if self.avatar.present?
+      ActionController::Base.helpers.image_tag(self.avatar.url, :class => 'avatar')
+    else
+      ActionController::Base.helpers.image_tag("missing_avatar.jpg", :class => 'avatar')
+    end
+  end
+
+  def get_avatar_path
+    if self.avatar.present?
+      ActionController::Base.helpers.image_path(self.avatar.url, :class => 'avatar')
+    else
+      ActionController::Base.helpers.image_path("missing_avatar.jpg", :class => 'avatar')
+    end
   end
 
   private

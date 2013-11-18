@@ -4,7 +4,7 @@
   <%= gmaps4rails(@pins) %>
 </div>
 
-<div class="page_header"><h1>Entries in <%= @month %>/<%= @year %> </h1></div>
+<div class="page_header"><h1>Entries in <%= month_names[@month.to_s] %> <%= @year %> </h1></div>
 
 <% @posts_d.each_with_index do |post, index| %>
   <div class="row entry">
