@@ -9,7 +9,7 @@ class StaticPagesController < ApplicationController
       redirect_to root_path
     else
       @country = params[:query]
-      @posts = Post.posts_by_country(@current_user, @country)
+      @posts = Post.posts_by_country(@profile_user, @country)
       configure_posts_for_gmaps(@posts)
     end
   end
@@ -21,7 +21,7 @@ class StaticPagesController < ApplicationController
       @month = params[:month]
       @year = params[:year]
 
-      @posts_d = Post.posts_by_travel_date(@current_user, @month, @year)
+      @posts_d = Post.posts_by_travel_date(@profile_user, @month, @year)
       configure_posts_for_gmaps(@posts_d)
     end
   end

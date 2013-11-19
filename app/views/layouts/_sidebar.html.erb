@@ -1,8 +1,12 @@
 <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
   <div class="well sidebar-nav">
     <div id="about-me-container">
-      <%= @current_user.get_avatar %>
-      <p class="about-me"><%= @current_user.about_me %></p>
+      <%= @profile_user.get_avatar %>
+      <p class="about-me">
+        <b><%= @profile_user.name %></b><br/>
+        <b><%= @profile_user.id %></b><br/>
+        <%= @profile_user.about_me %>
+      </p>
     </div>
   </div>
 
@@ -16,7 +20,7 @@
       else
         @latest_posts.each do |p|
     %>
-      <li><%= link_to p.title, p %></li>
+      <li><%= link_to p.title, user_post_path(p.user, p) %></li>
     <% end end %>
 
       <li class="nav nav-divider"></li>
@@ -27,7 +31,8 @@
       else
         @countries.each do |c|
     %>
-      <li><%= link_to c["_id"]["country"] + " (" + c["posts_count"].to_s + ")", {:action => "countries", :controller => "static_pages", :query => c["_id"]["country"]}, {"data-no-turbolink" => true} %></li>
+      <li><%= link_to c["_id"]["country"] + " (" + c["posts_count"].to_s + ")", user_countries_path(@profile_user, :query => c["_id"]["country"]), {"data-no-turbolink" => true} %>
+      </li>
     <% end end %>
 
       <li class="nav nav-divider"></li>
@@ -38,7 +43,8 @@
       else
         @archives.each do |a|
     %>
-      <li><%= link_to month_names[a["_id"]["month"].to_s] + " " + a["_id"]["year"].to_s + " (" + a["posts_count"].to_s + ")", {:action => "archive", :controller => "static_pages", :month => a["_id"]["month"], :year => a["_id"]["year"]}, {"data-no-turbolink" => true} %></a></li>
+      <li><%= link_to month_names[a["_id"]["month"].to_s] + " " + a["_id"]["year"].to_s + " (" + a["posts_count"].to_s + ")", user_archive_path(@profile_user, :month => a["_id"]["month"], :year => a["_id"]["year"]), {"data-no-turbolink" => true} %>
+      </li>
     <% end end %>
 
       <li class="nav nav-divider"></li>

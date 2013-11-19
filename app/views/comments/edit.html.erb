@@ -1,7 +1,4 @@
 <% provide(:title, "Edit Comment") %>
-<div class="page_header">Edit Comment</h1></div>
+<div class="page_header"><h1>Edit Comment</h1></div>
 
-<%= render partial: 'comments/form', locals: { button_label: "Save Changes", cancel_path: post_path(@post) } %>
-
-<%= link_to 'Show', post_comment_path(@post, @comment) %> |
-<%= link_to 'Back', post_comments_path(@post) %>
+<%= render partial: 'comments/form', locals: { button_label: "Save Changes", cancel_path: user_post_path(@current_user, @post) } %>

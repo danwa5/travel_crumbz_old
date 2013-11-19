@@ -20,7 +20,7 @@
               Account <b class="caret"></b>
             </a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="account">
-              <li role="presentation"><%= link_to "Add Post", new_post_path %></li>
+              <li role="presentation"><%= link_to "Add Post", new_user_post_path(@current_user) %></li>
               <li class="divider"></li>
               <li role="presentation"><%= link_to "Profile", current_user %></li>
               <li role="presentation"><%= link_to "Settings", edit_user_path(current_user) %></li>
@@ -34,7 +34,7 @@
       </ul>
     <% if signed_in? %>
       <ul class="nav navbar-nav pull-right">
-        <li><a>Signed in as <%= current_user.email %></a></li>
+        <li><a>Signed in as <%= current_user.email %> <%= current_user.id %></a></li>
       </ul>
     <% end %>
     </div>

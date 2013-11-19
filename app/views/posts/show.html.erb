@@ -27,19 +27,22 @@
     <p>
       <strong>Likes:</strong>
       <%= @post.likes.nil? ? 0 : @post.likes %>
-      <%= link_to post_like_path(@post), method:"put" do %>
+      <%= link_to user_post_like_path(@post.user, @post), method:"put" do %>
         <span class="glyphicon glyphicon-thumbs-up"></span>
       <% end %>
     </p><br/>
 
     <p>
       <strong>Photos:</strong><br/>
+
+    <% if @post.user == current_user %>  
       <button type="button" class="btn btn-success btn-sm">
         <span class="glyphicon glyphicon-plus"></span> Select photos...
       </button>
       <button type="button" class="btn btn-info btn-sm">
         <span class="glyphicon glyphicon-cloud-upload"></span> Start upload
       </button>
+    <% end %>
     </p><br/>
 
     <p>
@@ -54,7 +57,7 @@
             <li class="commented-by">Commented on <%= comment.get_create_date %> by <%= comment.user.name %> 
 
             <% if current_user == comment.user %>
-              (<%= link_to "Edit", edit_post_comment_path(@post, comment) %>)
+              (<%= link_to "Edit", edit_user_post_comment_path(@post.user, @post, comment) %>)
             <% end %>
           </ul>
         </blockquote>
@@ -63,7 +66,7 @@
 
     <div class="row">
       <div class="col-md-offset-1 col-md-6 new-comment">
-        <%= form_for([@post, @post.comments.build], html: {class:"form-horizontal", role:"form"}) do |f| %>
+        <%= form_for([@post.user, @post, @post.comments.build], html: {class:"form-horizontal", role:"form"}) do |f| %>
         <div class="form-group">
           <%= f.label :rating, nil, class: "col-md-2 control-label" %>
           <div class="col-md-10">
@@ -86,7 +89,10 @@
     </div>
 
     <br/>
-    <%= link_to 'Edit Post', edit_post_path(@post) %> |
+
+    <% if @post.user == current_user %>
+      <%= link_to 'Edit Post', edit_user_post_path(@post.user, @post) %>
+    <% end %>
 
   <!--/div--><!--/span-->
 

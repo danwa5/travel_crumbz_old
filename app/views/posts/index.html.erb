@@ -19,7 +19,7 @@
       <div class="tile-content">
         <h4><%= post.title %></h4>
         <p><%= post.snippet(post.body) %></p>
-        <p><%= link_to 'Continue reading &raquo;'.html_safe, post, { class:"btn btn-default" } %></p>
+        <p><%= link_to 'Continue reading &raquo;'.html_safe, user_post_path(post.user, post), { class:"btn btn-default" } %></p>
       </div>
     </div>
   <% end %>
@@ -56,9 +56,9 @@
         <td><%= post.starred %></td>
         <td><%= post.likes.nil? ? "--" : post.likes %></td>
         <td><%= post.comments.count==0 ? "--" : post.comments.count %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', user_post_path(post.user, post) %></td>
+        <td><%= link_to 'Edit', edit_user_post_path(post.user, post) %></td>
+        <td><%= link_to 'Destroy', user_post_path(post.user, post), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -66,5 +66,5 @@
 
 <br>
 
-<%= link_to 'New Post', new_post_path %>
+<%= link_to 'New Post', new_user_post_path(@current_user) %>
 <% end %>

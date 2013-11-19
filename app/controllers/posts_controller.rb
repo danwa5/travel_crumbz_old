@@ -1,14 +1,17 @@
 class PostsController < ApplicationController
   include PostsHelper
-  #include SessionsHelper
+  include SessionsHelper
   
   before_action :signed_in_user
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user,   only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_user,       only: [:show, :like]
+  before_action :set_post,       only: [:show, :edit, :update, :destroy]
+  
 
   def index
-    @all_posts = Post.where(:user_id => @current_user).sort("start_date DESC")
+    @all_posts = Post.where(:user_id => @profile_user).sort("start_date DESC")
 
-    @posts = Post.starred_posts(@current_user)
+    @posts = Post.starred_posts(@profile_user)
     configure_posts_for_gmaps(@posts)
   end
 
@@ -21,33 +24,28 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
+    @post = @user.posts.build
     @post.build_location
+  end
+
+  def create
+    @post = @user.posts.build(post_params)
+
+    if @post.save
+      flash[:success] = "Post was successfully created."
+      redirect_to user_post_path(@post.user, @post)
+    else
+      render action: 'new'
+    end
   end
 
   def edit
   end
 
-  def create
-    @post = Post.new(post_params)
-    @post.user_id = @current_user.id
-
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @post }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def update
-    #@post.user_id = @current_user.id
+  def update      
     if @post.update_attributes(post_params)
       flash[:success] = "Post successfully updated!"
-      redirect_to @post
+      redirect_to user_post_path(@user, @post)
     else
       render action: 'edit'
     end
@@ -55,28 +53,35 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    respond_to do |format|
-      format.html { redirect_to posts_url }
-      format.json { head :no_content }
-    end
+    flash[:success] = "Post deleted."
+    redirect_to user_posts_path(@user)
   end
 
   def like
-    @post = Post.find(params[:post_id])
+    @post = @user.posts.find(params[:post_id])
     if @post.likes.nil?
       likes_count = 0
     else
       likes_count = @post.likes
     end
     @post.update_attribute(:likes, likes_count+1)
-    redirect_to @post
+    redirect_to user_post_path(@user, @post)
   end
 
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_user
+      @user = User.find(params[:user_id])
+    end
+
     def set_post
-      @post = Post.find(params[:id])
+      @post = @user.posts.find(params[:id])
+    end
+
+    def correct_user
+      @user = User.find(params[:user_id])
+      redirect_to(root_url) unless current_user?(@user)
     end
 
     def get_post_avg_rating(post)

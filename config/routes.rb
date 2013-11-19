@@ -5,25 +5,24 @@ RailsMongoid::Application.routes.draw do
 
   resources :users do
     resources :preference
+    resources :posts do
+      put :like
+      resources :location  
+      resources :comments  
+    end
+    get 'countries', to: 'static_pages#countries'
+    get 'archive', to: 'static_pages#archive'
   end
 
   resources :friendships, only: [:create, :destroy]
 
   resources :sessions, only: [:new, :create, :destroy]
 
-  resources :posts do
-    put :like
-    resources :location  
-    resources :comments  
-  end
-
-  root :to => redirect("/posts")
+  root 'posts#index'
 
   match '/signup', to: 'users#new', via: 'get'
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
-  match '/countries', to: 'static_pages#countries', via: 'get'
-  match '/archive', to: 'static_pages#archive', via: 'get'
   match '/gfs/:model/:field/:user_id/:filename', to: 'gridfs#serve', via: 'get'
 
 

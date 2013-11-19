@@ -5,19 +5,29 @@ class ApplicationController < ActionController::Base
 
   include SessionsHelper
 
+  before_action :get_user_info
   before_action :get_latest_posts
   before_action :get_posts_by_countries
   before_action :get_posts_by_travel_dates
 
+  def get_user_info
+    if params[:user_id].present?
+      user = User.find(params[:user_id])
+      @profile_user = user
+    else
+      @profile_user = current_user
+    end
+  end
+
   def get_latest_posts
-    @latest_posts = Post.latest_posts(self.current_user)
+    @latest_posts = Post.latest_posts(@profile_user)
   end
 
   def get_posts_by_countries
-    @countries = Post.posts_by_countries(self.current_user)
+    @countries = Post.posts_by_countries(@profile_user)
   end
 
   def get_posts_by_travel_dates
-    @archives = Post.posts_by_travel_dates(self.current_user)
+    @archives = Post.posts_by_travel_dates(@profile_user)
   end
 end

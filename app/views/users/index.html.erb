@@ -12,8 +12,8 @@
       <%= index%6 == 0 ? "<div class='row'>".html_safe : "" %>
 
       <div class="col-md-2 profile-index">
-        <%= image_tag(friendship.acceptor.get_avatar_path) %><br/>
-        <%= friendship.acceptor.name %><br/>
+        <%= link_to image_tag(friendship.acceptor.get_avatar_path), user_posts_path(friendship.acceptor), {"data-no-turbolink" => true} %><br/>
+        <%= link_to friendship.acceptor.name, user_posts_path(friendship.acceptor), {"data-no-turbolink" => true} %><br/>
         <%= link_to "Delete Friend", friendship, method: :delete, data: { confirm: 'Are you sure?' } %>
       </div>
 
@@ -36,8 +36,8 @@
       <%= index%6 == 0 ? "<div class='row'>".html_safe : "" %>
 
       <div class="col-md-2 profile-index">
-        <%= image_tag(friendship.requester.get_avatar_path) %><br/>
-        <%= friendship.requester.name %><br/>
+        <%= link_to image_tag(friendship.requester.get_avatar_path), user_posts_path(friendship.requester), {"data-no-turbolink" => true} %><br/>
+        <%= link_to friendship.requester.name, user_posts_path(friendship.requester), {"data-no-turbolink" => true} %><br/>
         <%= link_to "Delete Friend", friendship, method: :delete, data: { confirm: 'Are you sure?' } %>
       </div>
 

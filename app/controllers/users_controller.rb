@@ -44,11 +44,9 @@ class UsersController < ApplicationController
   end
   
   def edit
-    #@user = User.find(params[:id])
   end
   
   def update
-    #@user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "User profile updated!"
       sign_in @user
@@ -71,21 +69,25 @@ class UsersController < ApplicationController
                                    :remember_token, :password, :password_confirmation, 
                                    preference_attributes: [:id, :display_tiles, :sort_key, :sort_order])
     end
-    
-    # Before filters
-
-    # Defined in Sessions Helper
-    #def signed_in_user
-    #  unless signed_in?
-    #    store_location
-    #    redirect_to signin_url, notice: "Please sign in."
-    #  end
-    #end
 
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
     end
+
+    # def correct_user_or_friend
+    #   @user = User.find(params[:id])
+    #   unless current_user?(@user)
+    #     @friends = Array.new
+    #     current_user.friendships.each do |friendship|
+    #       @friends << friendship.acceptor
+    #     end
+
+    #     unless @friends.include? @user
+    #       redirect_to(root_url)
+    #     end
+    #   end
+    # end
     
     def admin_user
       redirect_to(root_url) unless current_user.admin?

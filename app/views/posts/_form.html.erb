@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
 
-  <%= form_for(@post, html: {class:"form-horizontal", role:"form"}) do |f| %>
+  <%= form_for([@current_user, @post], html: {class:"form-horizontal", role:"form"}) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
 
     <fieldset>
