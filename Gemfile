@@ -19,6 +19,7 @@ gem "geo-distance", "~> 0.2.0"
 gem 'carrierwave-mongoid', "~> 0.6.3"
 gem 'mongoid-grid_fs', github: 'ahoward/mongoid-grid_fs'
 gem "mini_magick", "~> 3.6.0"
+gem 'fog', '~> 1.18.0'
 
 # Other helpers
 gem 'bcrypt-ruby', '3.0.1'

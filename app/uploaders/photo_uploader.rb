@@ -1,26 +1,24 @@
 # encoding: utf-8
 
-class AvatarUploader < CarrierWave::Uploader::Base
+class PhotoUploader < CarrierWave::Uploader::Base
 
-  # Include RMagick or MiniMagick support:
-  #include CarrierWave::RMagick
   include CarrierWave::MiniMagick
-
-  CarrierWave.configure do |config|
-    config.storage = :grid_fs
-    config.grid_fs_access_url = "/gfs"
-    config.root = Rails.root.join('tmp')
-    config.cache_dir = "uploads"
-  end
+  # include CarrierWave::MimeTypes
 
   # Choose what kind of storage to use for this uploader:
-  # storage :file # => to store on filesystem
-  storage :grid_fs
+  # storage :file
+  storage :fog
+
+  # process :set_content_type
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  end
+
+  def cache_dir
+    "#{Rails.root}/tmp/uploads"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -32,32 +30,16 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-  process :resize_to_limit => [90, 90]
-  
-  #def scale(width, height)
-  #end
-
-  # Create different versions of your uploaded files:
-  # version :thumb do
-  #   process :resize_to_limit => [90, 90]
+  # process :scale => [200, 300]
+  process :resize_to_limit => [850, 850]
+  #
+  # def scale(width, height)
+  #   # do something
   # end
 
-  def file_version(version = nil)    
-    if version.nil?
-      self.file
-    elsif self.respond_to?(version)
-      self.send(version).file 
-    else
-      nil
-    end
-  end
-
-  def image?(file = nil)
-    file = self.file if file.nil?
-
-    return nil if file.nil?
-
-    file.content_type.include?('image') 
+  # Create different versions of your uploaded files:
+  version :thumb do
+    process :resize_to_fill => [375, 250]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

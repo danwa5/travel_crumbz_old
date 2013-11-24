@@ -1,4 +1,4 @@
-<% provide(:title, @post.title) %>
+<% provide(:title, @post.title.html_safe) %>
 
 <!--div class="row row-offcanvas row-offcanvas-right">
   <div class="col-xs-12 col-sm-9"-->
@@ -35,13 +35,35 @@
     <p>
       <strong>Photos:</strong><br/>
 
-    <% if @post.user == current_user %>  
-      <button type="button" class="btn btn-success btn-sm">
+      <div class="row post-gallery">
+        <div class="col-sm-12">
+
+        <% @photos.each do |p| %>
+          <div class="photo-thumbnail">
+            <%= image_tag p.image.url(:thumb) %>
+          </div>
+        <% end %>
+
+        </div>
+      </div>
+
+    <% if @post.user == current_user %>
+      <%= form_for([@post.user, @post, @post.photos.build], html: { class: "form-inline", role: "form", multipart: true}) do |f| %>
+        <div class="form-group">
+          <%= f.file_field :image, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :caption, {class: "form-control", placeholder: "Caption (optional)"} %>
+        </div>
+        <%= f.submit "Upload", class: "btn btn-primary" %>
+      <% end %>
+
+      <!--button type="button" class="btn btn-success btn-sm">
         <span class="glyphicon glyphicon-plus"></span> Select photos...
-      </button>
-      <button type="button" class="btn btn-info btn-sm">
+      </button-->
+      <!--button type="button" class="btn btn-info btn-sm">
         <span class="glyphicon glyphicon-cloud-upload"></span> Start upload
-      </button>
+      </button-->
     <% end %>
     </p><br/>
 

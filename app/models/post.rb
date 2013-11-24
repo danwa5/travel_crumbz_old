@@ -7,8 +7,10 @@ class Post
   belongs_to :user
   has_many :comments
   embeds_one :location
-  accepts_nested_attributes_for :location #, reject_if: lambda { |a| a[:country].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :comments #, :dependent => :destroy , :autosave => true
+  embeds_many :photos
+  accepts_nested_attributes_for :location, :allow_destroy => true #, reject_if: lambda { |a| a[:country].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :comments, :allow_destroy => true #, :dependent => :destroy , :autosave => true
+  accepts_nested_attributes_for :photos, :allow_destroy => true
 
   validates_presence_of :title, :body
   validates_associated :location

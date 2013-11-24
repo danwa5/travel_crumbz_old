@@ -16,6 +16,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @photos = @post.photos.all
     get_post_avg_rating(@post)
 
     lat2 = @post.location.coordinates[1]
@@ -93,7 +94,8 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:user_id, :title, :body, :starred, :start_date, :end_date, :likes, :loves,
-        location_attributes: [:id, :street, :city, :state, :country, :postal])
+        location_attributes: [:id, :street, :city, :state, :country, :postal],
+        photo_attributes: [:id, :photo, :caption])
     end
 
 end

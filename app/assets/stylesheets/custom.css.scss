@@ -19,6 +19,21 @@
   height: 150px;
 }
 
+.post-gallery {
+  margin-bottom: 20px;
+}
+
+.photo-thumbnail {
+  float: left;
+}
+
+.photo-thumbnail img {
+  padding: 3px;
+  border: 1px solid #cccccc;
+  background-color: ff0;
+  margin: 10px;
+}
+
 .message {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 18px;
@@ -139,7 +154,7 @@ textarea {
 #tile-8,
 #tile-9,
 .tile-content {
-  height: 260px;
+  height: 250px;
   border-radius: 8px;
   float: left;
   margin-bottom: 5px;

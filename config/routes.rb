@@ -8,7 +8,8 @@ RailsMongoid::Application.routes.draw do
     resources :posts do
       put :like
       resources :location  
-      resources :comments  
+      resources :comments
+      resources :photos
     end
     get 'countries', to: 'static_pages#countries'
     get 'archive', to: 'static_pages#archive'
