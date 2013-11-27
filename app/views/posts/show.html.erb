@@ -40,7 +40,7 @@
 
         <% @photos.each do |p| %>
           <div class="photo-thumbnail">
-            <%= image_tag p.image.url(:thumb) %>
+            <%= image_tag p.image_url(:thumb) %>
           </div>
         <% end %>
 

@@ -1,14 +1,31 @@
 CarrierWave.configure do |config|
-  config.storage = :fog
-  config.root = "#{Rails.root}/tmp"
-  config.cache_dir = "#{Rails.root}/tmp/uploads"
-  config.fog_directory    = ENV['S3_BUCKET_NAME']
 
-  config.fog_credentials = {
-    :provider              => 'AWS',
-    :aws_access_key_id     => ENV['AWS_ACCESS_KEY_ID'],
-    :aws_secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
-  }
+  config.root = Rails.root.join('tmp')
+  config.cache_dir = "#{Rails.root}/tmp/uploads"
+
+  if Rails.env.production?
+    config.storage = :fog
+    
+    config.fog_directory    = ENV['S3_BUCKET_NAME']
+    config.fog_credentials = {
+      :provider              => 'AWS',
+      :aws_access_key_id     => ENV['AWS_ACCESS_KEY_ID'],
+      :aws_secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    }
+  else
+    config.storage = :file
+  end
+
+  # config.storage = :fog
+  # config.root = "#{Rails.root}/tmp"
+  # config.cache_dir = "#{Rails.root}/tmp/uploads"
+  # config.fog_directory    = ENV['S3_BUCKET_NAME']
+
+  # config.fog_credentials = {
+  #   :provider              => 'AWS',
+  #   :aws_access_key_id     => ENV['AWS_ACCESS_KEY_ID'],
+  #   :aws_secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+  # }
 end
 
 # if Rails.env.test? || Rails.env.development?

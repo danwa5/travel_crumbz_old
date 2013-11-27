@@ -12,7 +12,7 @@ class Post
   accepts_nested_attributes_for :comments, :allow_destroy => true #, :dependent => :destroy , :autosave => true
   accepts_nested_attributes_for :photos, :allow_destroy => true
 
-  validates_presence_of :title, :body
+  validates_presence_of :title, :body#, :start_date
   validates_associated :location
 
   field :title, type: String
@@ -80,7 +80,7 @@ class Post
 
   def self.posts_by_countries(user)
     unless user.blank?
-      match = {"$match" => {"user_id" => user.id}}
+      match = {"$match" => {"user_id" => user.id }}
       project = {"$project" => {"location.country" => 1}}
       group = {"$group" => {"_id" => {"country" => "$location.country"}, "posts_count" => {"$sum" => 1}}}
       sort = {"$sort" => {"_id.country" => 1}}
@@ -90,7 +90,7 @@ class Post
 
   def self.posts_by_travel_dates(user)
     unless user.blank?
-      match = {"$match" => {"user_id" => user.id}}
+      match = {"$match" => {"user_id" => user.id, "start_date" => {"$ne" => nil}}}
       group = {"$group" => {"_id" => {"year" => {"$year" =>"$start_date"}, "month" => {"$month" => "$start_date"}}, "posts_count" => {"$sum" => 1}}}
       sort = {"$sort" => {"_id.year" => -1, "_id.month" => -1}}
       collection.aggregate([match, group, sort])

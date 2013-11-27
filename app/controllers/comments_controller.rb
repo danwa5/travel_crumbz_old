@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
     if (@comment.save)
       flash[:success] = "Comment successfully added to post!"
     else
-      flash[:warning] = "Comment could not be added to post!"
+      flash[:danger] = "Comment could not be added to post! Rating is a required field."
     end
 
     redirect_to user_post_path(@post.user, @post)

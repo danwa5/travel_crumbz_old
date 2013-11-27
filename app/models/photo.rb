@@ -9,6 +9,6 @@ class Photo
   field :caption, type: String
 
   def image_name
-  	File.basename(photo.path || photo.filename) if photo
+    File.basename(photo.path || photo.filename) if photo
   end
 end

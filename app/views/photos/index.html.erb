@@ -1,0 +1,15 @@
+<% provide(:title, "Gallery | " + @post.title.html_safe) %>
+<div class="page_header"><h1><%=  @post.title.html_safe %></h1></div>
+
+<div class="row post-gallery">
+  <div class="col-sm-12">
+
+    <% @photos.each do |p| %>
+      <div class="photo-thumbnail">
+        <%= image_tag p.image.url(:medium) %><br/>
+        <%= p.caption %>
+      </div>
+    <% end %>
+
+  </div>
+</div>

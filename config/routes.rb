@@ -25,6 +25,7 @@ RailsMongoid::Application.routes.draw do
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
   match '/gfs/:model/:field/:user_id/:filename', to: 'gridfs#serve', via: 'get'
+  match "/uploads/:model/:field/:photo_id/:filename", to: 'photos#serve', via: 'get'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
