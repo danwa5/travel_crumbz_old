@@ -14,7 +14,12 @@ class User
   validates_associated :preference
   mount_uploader :avatar, AvatarUploader
 
-  before_save { self.email = email.downcase }
+  before_save {
+    self.last_name = self.last_name.titleize
+    self.first_name = self.first_name.titleize
+    self.email = email.downcase
+  }
+
   before_create :create_remember_token
 
   field :last_name, type: String

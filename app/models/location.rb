@@ -12,6 +12,11 @@ class Location
 
   validates_presence_of :city, :country
 
+  before_validation { 
+    self.city = self.city.titleize
+    self.state = self.state.titleize
+  }
+
   field :street, type: String
   field :city, type: String
   field :state, type: String

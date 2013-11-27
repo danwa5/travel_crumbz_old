@@ -12,8 +12,12 @@ class Post
   accepts_nested_attributes_for :comments, :allow_destroy => true #, :dependent => :destroy , :autosave => true
   accepts_nested_attributes_for :photos, :allow_destroy => true
 
-  validates_presence_of :title, :body#, :start_date
+  validates_presence_of :title, :body
   validates_associated :location
+
+  before_save { 
+    self.title = post_title_case(self.title)
+  }
 
   field :title, type: String
   field :body, type: String
@@ -58,6 +62,15 @@ class Post
       #  s = s.concat("...")
       #end
     end
+  end
+
+  def post_title_case(title)
+    cap_exceptions = [ 
+      'of','a','the','and','an','or','nor','but','if','then','else','when',
+      'up','at','from','by','on', 'off','for','in','out','over','to'
+    ]
+    title = title.downcase.split.map {|w| cap_exceptions.include?(w) ? w : w.capitalize}.join(" ")
+    title = title[0,1].capitalize + title[1, title.length-1]
   end
 
   def self.get_first_day_of_month(month, year)
