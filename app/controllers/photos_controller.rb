@@ -17,7 +17,11 @@ class PhotosController < ApplicationController
     if (@photo.save)
       flash[:success] = "Photo successfully added to post!"
     else
-      flash[:danger] = "Photo could not be added to post!"
+      if @photo.image.blank?
+        flash[:danger] = "Photo could not be added to post! Please select a JPG image."
+      else
+        flash[:danger] = "Photo could not be added to post!"
+      end
     end
 
     redirect_to user_post_path(@post.user, @post)

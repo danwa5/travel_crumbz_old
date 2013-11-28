@@ -5,6 +5,8 @@ class Photo
 
   mount_uploader :image, PhotoUploader
 
+  validates_presence_of :image
+  
   field :image, type: String
   field :caption, type: String
 
