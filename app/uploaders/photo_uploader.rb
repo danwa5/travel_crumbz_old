@@ -3,7 +3,7 @@
 class PhotoUploader < CarrierWave::Uploader::Base
 
   include CarrierWave::MiniMagick
-  # include CarrierWave::MimeTypes
+  include CarrierWave::MimeTypes
 
   # Choose what kind of storage to use for this uploader:
   if Rails.env.production?
@@ -31,9 +31,8 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # end
 
   process :auto_orient # display portrait photos right side up
-
   process :filename # convert file extension to lowercase
-
+  process :set_content_type
 
   # Process files as they are uploaded:
   # process :scale => [200, 300]
@@ -73,7 +72,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   def filename
     File.basename(original_filename, File.extname(original_filename)) +
-      File.extname(super).downcase! if original_filename.present?
+      File.extname(super).downcase if original_filename.present?
   end
 
 end
