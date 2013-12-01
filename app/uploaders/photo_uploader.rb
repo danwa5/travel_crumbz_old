@@ -30,6 +30,11 @@ class PhotoUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
+  process :auto_orient # display portrait photos right side up
+
+  process :filename # convert file extension to lowercase
+
+
   # Process files as they are uploaded:
   # process :scale => [200, 300]
   process :resize_to_limit => [850, 850]
@@ -59,5 +64,16 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  def auto_orient
+    manipulate! do |image|
+      image.tap(&:auto_orient)
+    end
+  end
+
+  def filename
+    File.basename(original_filename, File.extname(original_filename)) +
+      File.extname(super).downcase! if original_filename.present?
+  end
 
 end

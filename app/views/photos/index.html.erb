@@ -1,13 +1,22 @@
 <% provide(:title, "Gallery | " + @post.title.html_safe) %>
-<div class="page_header"><h1><%=  @post.title.html_safe %></h1></div>
+
+<div class="page_header">
+  <h1><%= @post.title %></h1>
+  <h5><%= @post.location.city_country %></h5>
+  <h5><%= @post.get_dates %></h5>
+</div>
 
 <div class="row post-gallery">
   <div class="col-sm-12">
 
-    <% @photos.each do |p| %>
+    <% @photos.each do |photo| %>
       <div class="photo-thumbnail">
-        <%= image_tag p.image.url(:medium) %><br/>
-        <%= p.caption %>
+        <%= image_tag photo.image.url(:medium) %><br/>
+        <%= photo.caption %>
+        <% if @post.user == current_user %>
+          <%= link_to 'Edit', edit_user_post_photo_path(photo.post.user, photo.post, photo) %> |
+          <%= link_to 'Delete', user_post_photo_path(photo.post.user, photo.post, photo), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
       </div>
     <% end %>
 
