@@ -6,6 +6,8 @@
   <h5><%= @post.get_dates %></h5>
 </div>
 
+<%= link_to "Back to Post", user_post_path(@post.user, @post) %>
+
 <div class="row post-gallery">
   <div class="col-sm-12">
 

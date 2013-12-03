@@ -98,7 +98,7 @@ class Post
     end
   end
 
-  def cover_photo
+  def cover_photo(tile_num)
     if self.photos.count > 0
       match = {"$match" => {"_id" => self.id}}
       project = { "$project" => {"photos" => 1}}
@@ -108,14 +108,24 @@ class Post
       results = Array.new
       results = collection.aggregate([match, project, unwind, match2, limit])
 
+      med_arr = [3,6,7]
       if results.blank?
-        self.photos.first.image_url(:medium)
+        if med_arr.include? (tile_num)
+          self.photos.first.image_url(:medium)
+        else
+          self.photos.first.image_url
+        end
       else
         id = results[0]["photos"]["_id"]
-        self.photos.find(id).image_url(:medium)
+
+        if med_arr.include? (tile_num)
+          self.photos.find(id).image_url(:medium)
+        else
+          self.photos.find(id).image_url
+        end
       end
     else
-      'trees.jpg'
+      '/assets/trees.jpg'
     end
   end
 
@@ -168,7 +178,7 @@ class Post
     end
   end
 
-  def self.starred_posts(user)
+  def self.posts_with_photos(user)
     unless user.blank?
       if user.preference?
         sortKey = user.preference.sort_key
@@ -180,9 +190,24 @@ class Post
         limitCount = 9
       end
 
-      #where(:user_id.exists => true)
-      where(:user_id => user.id, :starred => true).sort(sortKey + " " + sortOrder).limit(limitCount)
+      where(:user_id => user.id, :photos.exists => true, :photos.ne => []).sort(sortKey + " " + sortOrder).limit(limitCount)
     end
   end
+
+  # def self.starred_posts(user)
+  #   unless user.blank?
+  #     if user.preference?
+  #       sortKey = user.preference.sort_key
+  #       sortOrder = user.preference.sort_order
+  #       limitCount = user.preference.display_tiles
+  #     else
+  #       sortKey = "start_date"
+  #       sortOrder = "DESC"
+  #       limitCount = 9
+  #     end
+
+  #     where(:user_id => user.id, :starred => true).sort(sortKey + " " + sortOrder).limit(limitCount)
+  #   end
+  # end
 
 end

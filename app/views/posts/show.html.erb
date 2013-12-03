@@ -33,7 +33,10 @@
     </p><br/>
 
     <p>
-      <strong>Photos:</strong><br/>
+      <strong>Photos</strong>
+      <% if @post.photos.count > 0 %>
+        (<%= link_to "Full Gallery", user_post_photos_path(@post.user, @post) %>)
+      <% end %><br/>
 
       <div class="row post-gallery">
         <div class="col-sm-12">

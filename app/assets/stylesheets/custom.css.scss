@@ -155,7 +155,7 @@ textarea {
 #tile-8,
 #tile-9,
 .tile-content {
-  height: 250px;
+  height: 249px;
   border-radius: 8px;
   float: left;
   margin-bottom: 5px;
@@ -186,50 +186,39 @@ textarea {
 
 #tile-1 {
   width: 441px;
-  background:url(copenhagen.jpg);
 }
 
 #tile-2 {
   width: 401px;
-  background:url(sydney.jpg);
 }
 
 #tile-3 {
   width: 180px;
-  background:url(chocolisto.jpg);
 }
 
 #tile-4 {
   width: 661px;
-  background:url(cotopaxi.jpg);
 }
 
 #tile-5 {
   width: 600px;
-  background:url(argentina.jpg);
-  background-repeat:no-repeat;
-  background-size: 100%;
 }
 
 #tile-6 {
   width: 241px;
-  background:url(chile.jpg);
 }
 
 #tile-7 {
   width: 320px;
-  background:url(guayaquil.jpg);
 }
 
 #tile-8 {
   width: 521px;
-  background:url(villarica.jpg);
 }
 
 #tile-9 {
   width: 847px;
-  background:url(patagonia.jpg);
-  background-position:right center;
+  /* background-position:right center; */
 }
 
 /*
