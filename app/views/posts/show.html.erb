@@ -38,17 +38,43 @@
         (<%= link_to "Full Gallery", user_post_photos_path(@post.user, @post) %>)
       <% end %><br/>
 
-      <div class="row post-gallery">
-        <div class="col-sm-12">
+      <% if @post.photos.count > 0 %>
+      <div class="row">
+        <div class="col-sm-5">
 
-        <% @photos.each do |p| %>
-          <div class="photo-thumbnail">
-            <%= image_tag p.image_url(:thumb) %>
-          </div>
-        <% end %>
+          <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+              <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+              <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+              <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+            <% @photos.each_with_index do |photo,index| %>
+              <div class="item <%= index==0 ? 'active' : '' %>">
+                <%= image_tag photo.image.url(:medium) %>
+                <div class="carousel-caption">
+                  <p><%= photo.caption %></p>
+                </div>
+              </div>
+            <% end %>
+            </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+          </div><!-- carousel -->
 
         </div>
       </div>
+      <br/><br/>
+      <% end %>
 
     <% if @post.user == current_user %>
       <%= form_for([@post.user, @post, @post.photos.build], html: { class: "form-inline", role: "form", multipart: true}) do |f| %>

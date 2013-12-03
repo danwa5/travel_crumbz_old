@@ -6,21 +6,43 @@
   <h5><%= @post.get_dates('ordinal') %></h5>
 </div>
 
-<%= link_to "Back to Post", user_post_path(@post.user, @post) %>
+<%= link_to "Back to Post", user_post_path(@post.user, @post) %><br/><br/>
 
 <div class="row post-gallery">
   <div class="col-sm-12">
 
-    <% @photos.each do |photo| %>
-      <div class="photo-thumbnail">
-        <%= image_tag photo.image.url(:medium) %><br/>
-        <%= photo.caption %>
-        <% if @post.user == current_user %>
-          <%= link_to 'Edit', edit_user_post_photo_path(photo.post.user, photo.post, photo) %> |
-          <%= link_to 'Delete', user_post_photo_path(photo.post.user, photo.post, photo), method: :delete, data: { confirm: 'Are you sure?' } %>
-        <% end %>
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+      <% @photos.each_with_index do |photo,index| %>
+        <div class="item <%= index==0 ? 'active' : '' %>">
+          <%= image_tag photo.image.url %>
+          <div class="carousel-caption">
+            <h3><%= photo.caption %></h3>
+            <% if @post.user == current_user %>
+              <%= link_to 'Edit', edit_user_post_photo_path(photo.post.user, photo.post, photo) %> |
+              <%= link_to 'Delete', user_post_photo_path(photo.post.user, photo.post, photo), method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
       </div>
-    <% end %>
+
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div><!-- carousel -->
 
   </div>
 </div>

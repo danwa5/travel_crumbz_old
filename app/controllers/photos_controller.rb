@@ -8,7 +8,6 @@ class PhotosController < ApplicationController
 
   def index
     @photos = @post.photos.all
-    @testing = @post.testing
   end
 
   def new
