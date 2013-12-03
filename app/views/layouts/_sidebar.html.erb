@@ -1,9 +1,9 @@
 <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
   <div class="well sidebar-nav">
     <div id="about-me-container">
-      <%= @profile_user.get_avatar %>
+      <%= link_to @profile_user.get_avatar, user_posts_path(@profile_user), {"data-no-turbolink" => true} %>
       <p class="about-me">
-        <b><%= @profile_user.name %></b><br/>
+        <b><%= link_to @profile_user.name, user_posts_path(@profile_user), {"data-no-turbolink" => true} %></b><br/>
         <%= @profile_user.about_me %>
       </p>
     </div>

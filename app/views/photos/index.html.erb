@@ -3,7 +3,7 @@
 <div class="page_header">
   <h1><%= @post.title %></h1>
   <h5><%= @post.location.city_country %></h5>
-  <h5><%= @post.get_dates %></h5>
+  <h5><%= @post.get_dates('ordinal') %></h5>
 </div>
 
 <%= link_to "Back to Post", user_post_path(@post.user, @post) %>

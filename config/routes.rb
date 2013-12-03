@@ -13,6 +13,7 @@ RailsMongoid::Application.routes.draw do
     end
     get 'countries', to: 'static_pages#countries'
     get 'archive', to: 'static_pages#archive'
+    get 'overview', to: 'static_pages#overview'
   end
 
   resources :friendships, only: [:create, :destroy]

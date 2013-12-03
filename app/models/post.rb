@@ -32,13 +32,22 @@ class Post
   index({ remember_token: 1 })
   index({ user_id: 1 })
 
-  def get_dates
+  def get_dates(format)
     String str = String.new
     unless self.start_date.blank?
       unless self.end_date.blank?
-        str << " to " + date_ordinal_format(self.end_date)
+        if format == 'ordinal'
+          str << " to " + date_ordinal_format(self.end_date)
+        else
+          str << " to " + date_short_format(self.end_date)
+        end
       end
-      str.prepend(date_ordinal_format(self.start_date))
+
+      if format == 'ordinal'
+        str.prepend(date_ordinal_format(self.start_date))
+      else
+        str.prepend(date_short_format(self.start_date))
+      end
     end
   end
 
@@ -81,22 +90,22 @@ class Post
     Time.new(year, (month.to_i + 1) , 1) - 1
   end
 
-  def testing
-    match = {"$match" => {"_id" => self.id}}
-    project = { "$project" => {"photos" => 1}}
-    unwind = { "$unwind" => "$photos"}
-    match2 = {"$match" => {"photos.cover_photo" => true}}
-    limit = {"$limit" => 1}
-    results = Array.new
-    # collection.aggregate([match, project, unwind, match2, limit])
-    results = collection.aggregate([match, project, unwind, match2, limit])
+  # def testing
+  #   match = {"$match" => {"_id" => self.id}}
+  #   project = { "$project" => {"photos" => 1}}
+  #   unwind = { "$unwind" => "$photos"}
+  #   match2 = {"$match" => {"photos.cover_photo" => true}}
+  #   limit = {"$limit" => 1}
+  #   results = Array.new
+  #   # collection.aggregate([match, project, unwind, match2, limit])
+  #   results = collection.aggregate([match, project, unwind, match2, limit])
 
-    if results.blank?
-      "nuthin"
-    else
-      results[0]["photos"]["_id"]
-    end
-  end
+  #   if results.blank?
+  #     "nuthin"
+  #   else
+  #     results[0]["photos"]["_id"]
+  #   end
+  # end
 
   def cover_photo(tile_num)
     if self.photos.count > 0
@@ -136,6 +145,12 @@ class Post
   def self.latest_posts(user)
     unless user.blank?
       where(:user_id => user.id).sort("created_at DESC").limit(10)
+    end
+  end
+
+  def self.all_posts(user)
+    unless user.blank?
+      where(:user_id => user.id).sort("start_date DESC")
     end
   end
 

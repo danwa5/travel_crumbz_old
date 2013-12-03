@@ -3,6 +3,7 @@ class StaticPagesController < ApplicationController
   include ApplicationHelper
 
   before_action :signed_in_user
+  before_action :correct_user,   only: [:overview]
 
   def countries
     if params[:query].blank?
@@ -25,5 +26,16 @@ class StaticPagesController < ApplicationController
       configure_posts_for_gmaps(@posts_d)
     end
   end
+
+  def overview
+    @posts = Post.all_posts(@profile_user)
+  end
+
+  private
+
+    def correct_user
+      @user = User.find(params[:user_id])
+      redirect_to(root_url) unless current_user?(@user)
+    end
 
 end

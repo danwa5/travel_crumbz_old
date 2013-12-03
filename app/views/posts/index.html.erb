@@ -9,10 +9,6 @@
   <div class="col-lg-12">
   <!--div class="col-6 col-sm-6 col-lg-4"-->
 
-  <!-- length = <%= @posts.length %> -->
-  <!-- count = <%= @posts.count %> -->
-  <!-- arr count = <%= @posts.to_a.count %> -->
-
   <% @posts.each_with_index do |post, index| %>
 
     <% content_for :head do %>
@@ -44,46 +40,4 @@
   </div><!--/span-->
 </div><!--/row-->
 
-<hr>
-
 <%= yield :scripts %>
-
-<% if signed_in? %>
-<table>
-  <thead>
-    <tr>
-      <th>Location</th>
-      <th>Travel Date</th>
-      <th>Post Date</th>
-      <th>Starred</th>
-      <th>Likes</th>
-      <th>Comments</th>
-      <th>Photos</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @all_posts.each do |post| %>
-      <tr>
-        <td><%= post.location.city_country %></td>
-        <td><%= date_short_format(post.start_date) %></td>
-        <td><%= date_short_format(post.created_at) %></td>
-        <td><%= post.starred %></td>
-        <td><%= post.likes.nil? ? "--" : post.likes %></td>
-        <td><%= post.comments.count==0 ? "--" : post.comments.count %></td>
-        <td><%= post.photos.count==0 ? "--" : post.photos.count %></td>
-        <td><%= link_to 'Show', user_post_path(post.user, post) %></td>
-        <td><%= link_to 'Edit', edit_user_post_path(post.user, post) %></td>
-        <td><%= link_to 'Destroy', user_post_path(post.user, post), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Post', new_user_post_path(@current_user) %>
-<% end %>

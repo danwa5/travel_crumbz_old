@@ -9,8 +9,6 @@ class PostsController < ApplicationController
   
 
   def index
-    @all_posts = Post.where(:user_id => @profile_user).sort("start_date DESC")
-
     @posts = Post.posts_with_photos(@profile_user)
     configure_posts_for_gmaps(@posts)
   end

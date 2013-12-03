@@ -6,7 +6,7 @@
     <center>
       <h1><%= @post.title %></h1>
       <h5><%= @post.location.city_country %></h5>
-      <h5><%= @post.get_dates %></h5>
+      <h5><%= @post.get_dates('ordinal') %></h5>
     </center>
 
     <p>
