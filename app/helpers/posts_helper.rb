@@ -9,6 +9,10 @@ module PostsHelper
 
     @pins = @pins.gsub(/\]\[/, ",")
     @pins = @pins.gsub(/"/,"'")
+
+    if @pins == ''
+      @pins = []
+    end
   end
   
 end

@@ -21,6 +21,7 @@
       </thead>
 
       <tbody>
+      <% if @posts.any? %>
       <% @posts.each_with_index do |post,index| %>
         <tr>
           <td><%= index+1 %></td>
@@ -32,6 +33,11 @@
           <td><%= post.photos.count==0 ? "--" : post.photos.count %></td>
           <td><%= link_to '<span class="glyphicon glyphicon-pencil"></span>'.html_safe, edit_user_post_path(post.user, post) %></td>
           <td><%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, user_post_path(post.user, post), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+      <% else %>
+        <tr>
+          <td colspan="9"><div class="no-records">No entries found</div></td>
         </tr>
       <% end %>
       </tbody>

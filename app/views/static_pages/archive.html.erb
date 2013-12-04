@@ -1,8 +1,25 @@
 <% provide(:title, "Entries in " + @month + "/" + @year) %>
 
 <div class="jumbotron">
-  <%= gmaps4rails(@pins) %>
+  <%= gmaps({
+    "map_options" => { "auto_zoom" => false},
+    "markers"     => { "data" => @pins }
+  })
+  %>
 </div>
+
+<% content_for :scripts do %>
+  <script type="text/javascript" charset="utf-8">
+    Gmaps.map.callback = function() {
+      if (Gmaps.map.markers.length == 1) {
+        Gmaps.map.serviceObject.setZoom(7);
+      } else {
+        Gmaps.map.map_options.auto_zoom = true;
+        Gmaps.map.adjustMapToBounds();
+      }
+    }
+  </script>
+<% end %>
 
 <div class="page_header"><h1>Entries in <%= month_names[@month.to_s] %> <%= @year %> </h1></div>
 

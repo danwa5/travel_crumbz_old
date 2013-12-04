@@ -2,8 +2,28 @@
   <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
 </p>
 <div class="jumbotron">
-  <%= gmaps4rails(@pins) %>
+  <%#= gmaps4rails(@pins) %>
+  <%= gmaps({
+    "map_options" => { "auto_zoom" => false},
+    "markers"     => { "data" => @pins }
+  })
+  %>
 </div>
+
+<% content_for :scripts do %>
+  <script type="text/javascript" charset="utf-8">
+    Gmaps.map.callback = function() {
+      if (Gmaps.map.markers.length == 0) {
+        Gmaps.map.serviceObject.setZoom(1);
+      } else if (Gmaps.map.markers.length == 1) {
+        Gmaps.map.serviceObject.setZoom(7);
+      } else {
+        Gmaps.map.map_options.auto_zoom = true;
+        Gmaps.map.adjustMapToBounds();
+      }
+    }
+  </script>
+<% end %>
     
 <div class="row">
   <div class="col-lg-12">

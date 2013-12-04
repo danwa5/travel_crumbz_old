@@ -87,25 +87,12 @@ class Post
   end
 
   def self.get_last_day_of_month(month, year)
-    Time.new(year, (month.to_i + 1) , 1) - 1
+    if (month == "12")
+      Time.new(year, month, 31)
+    else
+      Time.new(year, (month.to_i + 1) , 1) - 1
+    end
   end
-
-  # def testing
-  #   match = {"$match" => {"_id" => self.id}}
-  #   project = { "$project" => {"photos" => 1}}
-  #   unwind = { "$unwind" => "$photos"}
-  #   match2 = {"$match" => {"photos.cover_photo" => true}}
-  #   limit = {"$limit" => 1}
-  #   results = Array.new
-  #   # collection.aggregate([match, project, unwind, match2, limit])
-  #   results = collection.aggregate([match, project, unwind, match2, limit])
-
-  #   if results.blank?
-  #     "nuthin"
-  #   else
-  #     results[0]["photos"]["_id"]
-  #   end
-  # end
 
   def cover_photo(tile_num)
     if self.photos.count > 0
