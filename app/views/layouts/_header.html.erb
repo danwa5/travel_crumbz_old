@@ -11,33 +11,43 @@
     </div>
     <div class="collapse navbar-collapse bs-js-navbar-collapse">
       <ul class="nav navbar-nav">
+
+      <% if signed_in? %>
         <li><%= link_to '<span class="glyphicon glyphicon-home"></span> Home'.html_safe, user_posts_path(@current_user), {"data-no-turbolink" => true} %></li>
         <li><%= link_to '<span class="glyphicon glyphicon-link"></span> Friends'.html_safe, users_path %></li>
         <li><%= link_to '<span class="glyphicon glyphicon-picture"></span> Gallery'.html_safe, '#' %></li>
-        <% if signed_in? %>
-          <li id="fat-menu" class="dropdown">
-            <a href="#" id="account" class="dropdown-toggle" data-toggle="dropdown" data-target="#">
-              <span class="glyphicon glyphicon-user"></span> Account <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="account">
-              <li role="presentation"><%= link_to "New Post", new_user_post_path(@current_user) %></li>
-              <li role="presentation"><%= link_to "Overview", user_overview_path(@current_user) %></li>
-              <li class="divider"></li>
-              <li role="presentation"><%= link_to "Profile", current_user %></li>
-              <li role="presentation"><%= link_to "Settings", edit_user_path(current_user) %></li>
-              <li class="divider"></li>
-              <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
-            </ul>
-          </li>
-        <% else %>
-          <li><%= link_to "Sign in", signin_path %></li>
+        <li id="fat-menu" class="dropdown">
+          <a href="#" id="account" class="dropdown-toggle" data-toggle="dropdown" data-target="#">
+            <span class="glyphicon glyphicon-user"></span> <%= current_user.first_name %> <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="account">
+            <li role="presentation"><%= link_to "New Post", new_user_post_path(@current_user) %></li>
+            <li role="presentation"><%= link_to "Overview", user_overview_path(@current_user) %></li>
+            <li class="divider"></li>
+            <li role="presentation"><%= link_to "Profile", current_user %></li>
+            <li role="presentation"><%= link_to "Settings", edit_user_path(current_user) %></li>
+            <li class="divider"></li>
+            <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
+          </ul>
+        </li>
+      </ul>
+    
+      <div class="col-sm-4 pull-right">
+        <%= form_tag(user_results_path(@current_user), method: "get", class: "navbar-form", id: "search-form") do %>
+          <div class="input-group input-group-sm">
+            <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Search" %>
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">
+                <span class="glyphicon glyphicon-search"></span>
+              </button>
+            </span>
+          </div>
         <% end %>
-      </ul>
-    <% if signed_in? %>
-      <ul class="nav navbar-nav pull-right">
-        <li><a>Signed in as <%= current_user.email %></a></li>
-      </ul>
-    <% end %>
+      </div>
+      <% else %>
+        <li><%= link_to '<span class="glyphicon glyphicon-lock"></span> Sign in'.html_safe, signin_path %></li></ul>
+      <% end %>
+
     </div>
   </div>
 </div>

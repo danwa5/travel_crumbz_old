@@ -1,0 +1,17 @@
+<% provide(:title, "Search Results") %>
+
+<div class="page_header"><h1>Search / <%= @query %></h1></div>
+    
+<% @results.each_with_index do |post, index| %>
+  <div class="row entry">
+    <div class="col-xs-3 entry-image2">
+      <%= link_to image_tag(post.cover_photo(nil)), user_post_path(post.user, post) %>
+    </div>
+    <div class="col-xs-9 entry-content">
+      <h3><%= link_to post.title, user_post_path(post.user, post) %></h3>
+      <h4><small><%= post.get_dates('ordinal') %> in <%= post.location.city_country %></small></h4>
+      <p><%= post.snippet_by_words(post.body, 25) %>...</p>          
+      <p><%= post.likes.nil? ? "0" : post.likes %> likes | <%= post.comments.count %> comments | <%= post.photos.count %> photos</p>
+    </div>
+  </div>
+<% end %>

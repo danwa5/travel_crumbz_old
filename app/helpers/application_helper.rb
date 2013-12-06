@@ -47,6 +47,14 @@ module ApplicationHelper
     end
   end
 
+  def valid_query(query)
+    if query.blank? || query.length < 3
+      return false
+    else
+      return true
+    end
+  end
+
   ###################
   #  Field Options  #
   ###################

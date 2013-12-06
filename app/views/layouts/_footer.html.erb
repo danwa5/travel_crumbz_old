@@ -1,16 +1,6 @@
 <footer class="footer">
   <div class="row">
     <div class="col-sm-6">
-      <%= form_tag(root_path, method: "get", class: "navbar-form", id: "search-form") do %>
-        <div class="input-group">
-          <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Search" %>
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="submit">
-              <span class="glyphicon glyphicon-search"></span>
-            </button>
-          </span>
-        </div>
-      <% end %>
     </div>
 
     <div class="col-sm-6">

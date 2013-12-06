@@ -31,6 +31,31 @@ class StaticPagesController < ApplicationController
     @posts = Post.all_posts(@profile_user)
   end
 
+  def results
+    @results = Array.new
+    @query = params[:query]
+    limit = 10
+    
+    if valid_query(@query)
+      @results = Post.location_search(@current_user, @query)
+      content_results = Post.content_search(@current_user, @query)
+      @results = @results.concat(content_results).uniq
+      if @results.count == 0
+        flash.now[:warning] = "No entries found. Please try another search."
+      else
+        msg = "#{@results.count} results found."
+        if @results.count > limit
+          msg << " However, only the first #{limit} will be returned."
+          @results = @results.take(limit)
+        end
+        flash.now[:success] = msg
+      end
+    else
+      flash.now[:warning] = "Search phrase must be at least 3 characters in length."
+      redirect_to root_path
+    end
+  end
+
   private
 
     def correct_user

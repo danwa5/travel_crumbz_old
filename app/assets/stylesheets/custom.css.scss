@@ -1,4 +1,16 @@
 
+/*
+ * Bootstrap Override
+ * --------------------------------------------------
+ */
+
+
+
+/*
+ * Misc
+ * --------------------------------------------------
+ */
+
 .page_header{
   padding-top: 10px;
   padding-bottom: 30px;
@@ -103,6 +115,14 @@ textarea {
   border-radius: 6px;
   width: 210px;
   height: 180px;
+}
+
+.entry-image2 img {
+  padding: 3px;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  width: 210px;
+  height: 140px;
 }
 
 .entry-content {

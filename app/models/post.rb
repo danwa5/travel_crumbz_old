@@ -212,4 +212,12 @@ class Post
   #   end
   # end
 
+  def self.location_search(user, query)
+    where("user_id" => user.id).any_of({"location.city" => /#{query}/i}, {"location.country" => /#{query}/i}, {"location.street" => /#{query}/i})
+  end
+
+  def self.content_search(user, query)
+    where("user_id" => user.id).any_of({"title" => /#{query}/i}, {"body" => /#{query}/i})
+  end
+
 end
