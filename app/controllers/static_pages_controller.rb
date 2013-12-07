@@ -51,7 +51,7 @@ class StaticPagesController < ApplicationController
         flash.now[:success] = msg
       end
     else
-      flash.now[:warning] = "Search phrase must be at least 3 characters in length."
+      flash[:warning] = "Search phrase must be at least 3 characters in length."
       redirect_to root_path
     end
   end
