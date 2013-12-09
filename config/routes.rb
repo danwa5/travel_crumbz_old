@@ -15,6 +15,7 @@ RailsMongoid::Application.routes.draw do
     get 'archive', to: 'static_pages#archive'
     get 'overview', to: 'static_pages#overview'
     get 'results', to: 'static_pages#results'
+    get 'responsive', to: 'posts#responsive'
   end
 
   resources :friendships, only: [:create, :destroy]

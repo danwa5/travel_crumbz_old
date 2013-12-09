@@ -1,7 +1,12 @@
 class SessionsController < ApplicationController
+  include SessionsHelper
 
   def new
-    render 'new'
+    if signed_in?
+      redirect_to root_url
+    else
+      render 'new'
+    end
   end
   
   def create

@@ -4,6 +4,55 @@
  * --------------------------------------------------
  */
 
+#t-1,
+#t-2,
+#t-3,
+#t-4,
+#t-5,
+#t-6,
+#t-7,
+#t-8,
+#t-9 {
+  h3 { color: #fff; }
+  h4 { color: #ccc; }
+}
+
+#t-1,
+#t-2,
+#t-3,
+#t-4,
+#t-5,
+#t-6,
+#t-7,
+#t-8,
+#t-9,
+.t-content {
+  width: 100%; /*****/
+  height: 249px;
+  border-radius: 8px;
+  float: left;
+  margin-bottom: 5px;
+  padding: 15px;
+  color: white;
+}
+
+.post-t {
+  /* float: left; */
+  position: relative;
+}
+
+.t-left {
+  margin-right: 5px;
+}
+
+.t-content {
+  color: #000;
+  background-color: #FF6600;
+  opacity: 0.85;
+  display: none;
+  z-index: 10;
+  p { font-weight: 500; }
+}
 
 
 /*
@@ -96,8 +145,7 @@ li.commented-by {
 .new-comment {
   background-color: #dddddd;
   margin-top: 20px;
-  padding-top: 20px;
-  padding-bottom: 0px;
+  padding: 20px 20px 5px 15px;
   border-radius: 8px;
 }
 
@@ -258,18 +306,28 @@ textarea {
  * --------------------------------------------------
  */
 
-.map-container {
+/* .map-container {
   background-color: #fff;
+} */
+
+.map_container {
+  width: 100%;
 }
 
+.gmaps4rails_map {
+  width: 100%;
+  height: 400px;
+}
 
 /*
  * Style twaks
  * --------------------------------------------------
  */
+
 body {
   padding-top: 70px;
 }
+
 footer {
   padding-left: 15px;
   padding-right: 15px;

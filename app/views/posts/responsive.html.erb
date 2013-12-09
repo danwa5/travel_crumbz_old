@@ -1,5 +1,4 @@
 <div class="jumbotron">
-  <%#= gmaps4rails(@pins) %>
   <%= gmaps({
     "map_options" => { "auto_zoom" => false},
     "markers"     => { "data" => @pins }
@@ -24,13 +23,12 @@
     
 <div class="row">
   <div class="col-md-12">
-  <!--div class="col-6 col-sm-6 col-lg-4"-->
 
   <% @posts.each_with_index do |post, index| %>
 
     <% content_for :head do %>
       <%= index==0 ? '<style>'.html_safe : '' %>
-        #tile-<%= index+1 %> {
+        #t-<%= index+1 %> {
           background:url(<%= post.cover_photo(index+1) %>);
           background-size: cover;
           background-repeat: no-repeat;
@@ -40,25 +38,22 @@
       <%= index==@posts.to_a.length-1 ? '</style>'.html_safe : '' %>
     <% end %>
 
-    <div class="post-tile">
-      <div id="tile-<%= index+1 %>" class="<%= index%2==0 ? 'tile-left' : '' %>">
+    <div class="post-t col-md-12 col-sm-12 col-xs-12">
+      <div id="t-<%= index+1 %>" class="<%#= index%2==0 ? 't-left' : '' %>">
         <h3><%= post.location.city %></h3>
         <h4><%= post.location.country %></h4>
       </div>
 
-      <div class="tile-content">
+      <div class="t-content">
         <h4><%= post.title %></h4>
         <p><%= post.snippet(post.body) %></p>
         <p><%= link_to 'Continue reading &raquo;'.html_safe, user_post_path(post.user, post), { class:"btn btn-default" } %></p>
       </div>
     </div>
+
   <% end %>
 
   </div><!--/span-->
 </div><!--/row-->
-
-<div class="row">
-  <%= link_to '<span class="badge">Responsive</span>'.html_safe, user_responsive_path(@profile_user) %>
-</div>
 
 <%= yield :scripts %>

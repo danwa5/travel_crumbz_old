@@ -13,6 +13,11 @@ class PostsController < ApplicationController
     configure_posts_for_gmaps(@posts)
   end
 
+  def responsive
+    @posts = Post.posts_with_photos(@profile_user)
+    configure_posts_for_gmaps(@posts)
+  end
+
   def show
     @photos = @post.photos.all
     get_post_avg_rating(@post)

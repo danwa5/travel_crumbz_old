@@ -27,19 +27,24 @@
       <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>
+
+      <p class="pull-right visible-xs">
+        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+      </p>
+
       <%= yield %>
 
       </div><!--/span-->
 
-    <% if signed_in? %>  
-      <%= render partial: 'layouts/sidebar' %>
-    <% end %>
+      <% if signed_in? %>
+        <%= render partial: 'layouts/sidebar' %>
+      <% end %>
 
     </div><!--/row-->
             
     <%= render 'layouts/footer' %>
     <%= debug(params) if Rails.env.development? %>
           
-  </div>
+  </div><!-- container -->
 </body>
 </html>

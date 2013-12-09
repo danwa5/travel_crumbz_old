@@ -4,10 +4,10 @@
     
 <% @results.each_with_index do |post, index| %>
   <div class="row entry">
-    <div class="col-xs-3 entry-image2">
+    <div class="col-md-3 col-sm-5 entry-image2">
       <%= link_to image_tag(post.cover_photo(nil)), user_post_path(post.user, post) %>
     </div>
-    <div class="col-xs-9 entry-content">
+    <div class="col-md-9 col-sm-7 entry-content">
       <h3><%= link_to post.title, user_post_path(post.user, post) %></h3>
       <h4><small><%= post.get_dates('ordinal') %> in <%= post.location.city_country %></small></h4>
       <p><%= post.snippet_by_words(post.body, 25) %>...</p>          

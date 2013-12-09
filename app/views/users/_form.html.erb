@@ -11,53 +11,53 @@
       <% end %>
 
       <div class="form-group">
-        <%= f.label :last_name, nil, class: "col-sm-4 control-label" %>
-        <div class="col-sm-8">
+        <%= f.label :last_name, nil, class: "col-md-4 col-sm-3 control-label" %>
+        <div class="col-md-8 col-sm-9">
           <%= f.text_field :last_name, class: "form-control" %>
         </div>
       </div>
 
       <div class="form-group">
-        <%= f.label :first_name, nil, class: "col-sm-4 control-label" %>
-        <div class="col-sm-8">
+        <%= f.label :first_name, nil, class: "col-md-4 col-sm-3 control-label" %>
+        <div class="col-md-8 col-sm-9">
           <%= f.text_field :first_name, class: "form-control" %>
         </div>
       </div>
 
       <div class="form-group">
-        <%= f.label :email, nil, class: "col-md-4 control-label" %>
-        <div class="col-md-8">
+        <%= f.label :email, nil, class: "col-md-4 col-sm-3 control-label" %>
+        <div class="col-md-8 col-sm-9">
           <%= f.text_field :email, class: "form-control" %>
         </div>
       </div>
 
     <% if !sign_up %>
       <div class="form-group">
-        <%= f.label :avatar, nil, class: "col-md-4 control-label" %>
-        <div class="col-md-8">
+        <%= f.label :avatar, nil, class: "col-md-4 col-sm-3 control-label" %>
+        <div class="col-md-8 col-sm-9">
           <%= f.file_field :avatar, class: "form-control" %>
           <%= f.hidden_field :avatar_cache %>
         </div>
       </div>
 
       <div class="form-group">
-        <%= f.label :about_me, nil, class: "col-md-4 control-label" %>
-        <div class="col-md-8">
+        <%= f.label :about_me, nil, class: "col-md-4 col-sm-3 control-label" %>
+        <div class="col-md-8 col-sm-9">
           <%= f.text_area :about_me, {class: "form-control", rows: 5} %>
         </div>
       </div>
     <% end %>
 
       <div class="form-group">
-        <%= f.label :password, nil, class: "col-md-4 control-label" %>
-        <div class="col-md-8">
+        <%= f.label :password, nil, class: "col-md-4 col-sm-3 control-label" %>
+        <div class="col-md-8 col-sm-9">
           <%= f.password_field :password, class: "form-control" %>
         </div>
       </div>
 
       <div class="form-group">
-        <%= f.label :password_confirmation, "Confirmation", class: "col-md-4 control-label" %>
-        <div class="col-md-8">
+        <%= f.label :password_confirmation, "Confirmation", class: "col-md-4 col-sm-3 control-label" %>
+        <div class="col-md-8 col-sm-9">
           <%= f.password_field :password_confirmation, class: "form-control" %>
         </div>
       </div>
@@ -69,22 +69,22 @@
 
         <%= f.fields_for :preference do |pref| %>
         <div class="form-group">
-          <%= pref.label :display_tiles, nil, class: "col-md-4 control-label" %>
-          <div class="col-md-8">
+          <%= pref.label :display_tiles, nil, class: "col-md-4 col-sm-3 control-label" %>
+          <div class="col-md-8 col-sm-9">
             <%= pref.select :display_tiles, tiles, {}, {class: "form-control"} %>
           </div>
         </div>
 
         <div class="form-group">
-          <%= pref.label :sort_key, nil, class: "col-md-4 control-label" %>
-          <div class="col-md-8">
+          <%= pref.label :sort_key, nil, class: "col-md-4 col-sm-3 control-label" %>
+          <div class="col-md-8 col-sm-9">
             <%= pref.select :sort_key, sort_key, {}, {class: "form-control"} %>
           </div>
         </div>
 
         <div class="form-group">
-          <%= pref.label :sort_order, nil, class: "col-md-4 control-label" %>
-          <div class="col-md-8">
+          <%= pref.label :sort_order, nil, class: "col-md-4 col-sm-3 control-label" %>
+          <div class="col-md-8 col-sm-9">
             <%= pref.select :sort_order, sort_order, {}, {class: "form-control"} %>
           </div>
         </div>
