@@ -119,6 +119,7 @@
     </p>
 
     <%= form_for([@post.user, @post, @post.comments.build], html: {class:"form-horizontal", role:"form"}) do |f| %>
+    <div class="row">
       <div class="col-md-6 new-comment">
         <div class="form-group">
           <%= f.label :rating, nil, class: "col-md-2 control-label" %>
@@ -138,7 +139,14 @@
           </div>
         </div>
       </div>
+    </div>
     <% end %>
+
+<div class="row">
+  <div class="col-md-12">
+    <span class="badge">Total Visits: <%= @visits %></span>
+  </div>
+</div>
 
 <script>
   $('#user_star').raty({

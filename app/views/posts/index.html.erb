@@ -58,7 +58,10 @@
 </div><!--/row-->
 
 <div class="row">
-  <%= link_to '<span class="badge">Responsive</span>'.html_safe, user_responsive_path(@profile_user), {"data-no-turbolink" => true} %>
+  <div class="col-md-12">
+    <span class="badge">Total Visits: <%= @visits %></span>
+    <%= link_to '<span class="badge">Responsive</span>'.html_safe, user_responsive_path(@profile_user), {"data-no-turbolink" => true} %>
+  </div>
 </div>
 
 <%= yield :scripts %>

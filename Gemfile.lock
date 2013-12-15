@@ -8,12 +8,12 @@ GIT
 
 GIT
   remote: git://github.com/mongoid/mongoid.git
-  revision: 1e480cf0df948375b220c29ce9602d13fb5430f8
+  revision: e3a55c2a68895723f876dd1daaa86ec39b085d38
   specs:
-    mongoid (4.0.0)
+    mongoid (4.0.0.alpha1)
       activemodel (~> 4.0.0)
-      moped (~> 2.0.beta3)
-      origin (~> 1.0)
+      moped (~> 2.0.beta4)
+      origin (~> 2.0)
       tzinfo (~> 0.3.37)
 
 GEM
@@ -46,7 +46,7 @@ GEM
     arel (4.0.1)
     atomic (1.1.14)
     bcrypt-ruby (3.0.1)
-    bson (2.0.0.rc3)
+    bson (2.0.0)
     bson_ext (1.5.1)
     builder (3.1.4)
     carrierwave (0.9.0)
@@ -64,6 +64,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    connection_pool (1.2.0)
     erubis (2.7.0)
     excon (0.28.0)
     execjs (2.0.2)
@@ -92,11 +93,11 @@ GEM
       geo_units (~> 0.2.1)
     geo_units (0.2.4.1)
       sugar-high (~> 0.4.6.2)
-    geocoder (1.1.8)
+    geocoder (1.1.9)
     gmaps4rails (1.5.6)
     hike (1.2.3)
-    i18n (0.6.5)
-    jbuilder (1.5.2)
+    i18n (0.6.9)
+    jbuilder (1.5.3)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     jquery-rails (3.0.4)
@@ -106,24 +107,25 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mime-types (1.25)
+    mime-types (1.25.1)
     mini_magick (3.6.0)
       subexec (~> 0.2.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
     mongo (1.3.1)
       bson (>= 1.3.1)
-    moped (2.0.0.beta3)
-      bson (~> 2.0.0.rc3)
-      optionable (~> 0.1.1)
+    moped (2.0.0.beta4)
+      bson (~> 2.0)
+      connection_pool (~> 1.2)
+      optionable (~> 0.2.0)
     multi_json (1.8.2)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
-    optionable (0.1.1)
-    origin (1.1.0)
+    optionable (0.2.0)
+    origin (2.0.0)
     polyglot (0.3.3)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -149,6 +151,7 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    redis (3.0.6)
     require_all (1.2.1)
     ruby-hmac (0.4.0)
     sass (3.2.12)
@@ -159,7 +162,7 @@ GEM
     sdoc (0.3.20)
       json (>= 1.1.3)
       rdoc (~> 3.10)
-    sprockets (2.10.0)
+    sprockets (2.10.1)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
@@ -177,10 +180,10 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (1.3.1)
+    turbolinks (2.0.0)
       coffee-rails
     tzinfo (0.3.38)
-    uglifier (2.3.1)
+    uglifier (2.3.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
 
@@ -205,6 +208,7 @@ DEPENDENCIES
   mongoid-grid_fs!
   rails (= 4.0.0)
   rails_12factor (= 0.0.2)
+  redis (~> 3.0.6)
   sass-rails (~> 4.0.0)
   sdoc
   turbolinks

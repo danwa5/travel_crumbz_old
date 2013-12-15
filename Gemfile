@@ -10,6 +10,9 @@ gem 'bson_ext'
 gem 'mongo'
 gem 'mongoid', github: 'mongoid/mongoid'
 
+# Use Redis
+gem "redis", "~> 3.0.6"
+
 # Maps
 gem 'geocoder', "~> 1.1.8"
 gem 'gmaps4rails', "~> 1.5.6"

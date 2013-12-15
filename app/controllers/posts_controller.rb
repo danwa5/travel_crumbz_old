@@ -4,13 +4,14 @@ class PostsController < ApplicationController
   
   before_action :signed_in_user
   before_action :correct_user,   only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_user,       only: [:show, :like]
+  before_action :set_user,       only: [:index, :show, :like]
   before_action :set_post,       only: [:show, :edit, :update, :destroy]
   
 
   def index
     @posts = Post.posts_with_photos(@profile_user)
     configure_posts_for_gmaps(@posts)
+    @visits = $redis.incr("visits:user:#{@user.id}:totals")
   end
 
   def responsive
@@ -21,6 +22,7 @@ class PostsController < ApplicationController
   def show
     @photos = @post.photos.all
     get_post_avg_rating(@post)
+    @visits = $redis.incr("visits:user:#{@user.id}:post:#{@post.id}:totals")
 
     lat2 = @post.location.coordinates[1]
     lng2 = @post.location.coordinates[0]
