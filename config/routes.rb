@@ -27,6 +27,7 @@ RailsMongoid::Application.routes.draw do
   match '/signup', to: 'users#new', via: 'get'
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
+  match '/about', to: 'static_pages#about', via: 'get'
   match '/gfs/:model/:field/:user_id/:filename', to: 'gridfs#serve', via: 'get'
   match "/uploads/:model/:field/:photo_id/:filename", to: 'photos#serve', via: 'get'
 
