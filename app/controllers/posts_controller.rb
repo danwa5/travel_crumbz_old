@@ -4,14 +4,20 @@ class PostsController < ApplicationController
   
   before_action :signed_in_user
   before_action :correct_user,   only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_user,       only: [:index, :show, :like]
+  before_action :set_user,       only: [:show, :like]
   before_action :set_post,       only: [:show, :edit, :update, :destroy]
   
 
   def index
     @posts = Post.posts_with_photos(@profile_user)
     configure_posts_for_gmaps(@posts)
-    @visits = $redis.incr("visits:user:#{@user.id}:totals")
+
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+      @visits = $redis.incr("visits:user:#{@user.id}:totals")
+    else
+      @visits = $redis.incr("visits:user:#{@profile_user.id}:totals")
+    end
   end
 
   def responsive
