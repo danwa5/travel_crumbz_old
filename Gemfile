@@ -11,7 +11,7 @@ gem 'mongo', '~> 2.2', '>= 2.2.2'
 gem 'mongoid', '~> 5.1'
 
 # Use Redis
-gem "redis", "~> 3.0.6"
+gem "redis", "~> 3.2.1"
 
 # Maps
 gem 'geocoder', "~> 1.1.8"

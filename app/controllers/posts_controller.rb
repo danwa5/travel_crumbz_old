@@ -14,9 +14,9 @@ class PostsController < ApplicationController
 
     if params[:user_id]
       @user = User.find(params[:user_id])
-      @visits = $redis.incr("visits:user:#{@user.id}:totals")
+      @visits = REDIS.incr("visits:user:#{@user.id}:totals")
     else
-      @visits = $redis.incr("visits:user:#{@profile_user.id}:totals")
+      @visits = REDIS.incr("visits:user:#{@profile_user.id}:totals")
     end
   end
 
@@ -28,13 +28,13 @@ class PostsController < ApplicationController
   def show
     @photos = @post.photos.all
     get_post_avg_rating(@post)
-    @visits = $redis.incr("visits:user:#{@user.id}:post:#{@post.id}:totals")
+    @visits = REDIS.incr("visits:user:#{@user.id}:post:#{@post.id}:totals")
 
     if @user != @current_user
       set_name = "visitors:user:#{@user.id}:post:#{@post.id}"
-      $redis.sadd(set_name, @current_user.id)
-      @visitors = $redis.smembers(set_name)
-      @num_visitors = $redis.scard(set_name)
+      REDIS.sadd(set_name, @current_user.id)
+      @visitors = REDIS.smembers(set_name)
+      @num_visitors = REDIS.scard(set_name)
     end
 
     lat2 = @post.location.coordinates[1]
