@@ -101,7 +101,7 @@
 
     <p>
       <strong>Comments (<%= @post.comments.count %>)</strong><br/>
-      <span class="avg_star"></span> (<%= @post_avg_rating.size==0 ? "n/a" : @post_avg_rating[0]["avg_rating"] %>)<br/><br/>
+      <span class="avg_star"></span> (<%= @post_avg_rating.count==0 ? "n/a" : @post_avg_rating[0]["avg_rating"] %>)<br/><br/>
 
       <% @post.comments.each_with_index do |comment, index| %>
         <blockquote>

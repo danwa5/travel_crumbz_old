@@ -5,10 +5,10 @@ ruby '2.1.2'
 gem 'rails', '4.0.0'
 
 # Use mongodb as database
-gem 'bson'
+gem 'bson', '~> 4.0', '>= 4.0.1'
 gem 'bson_ext'
-gem 'mongo'
-gem 'mongoid', github: 'mongoid/mongoid'
+gem 'mongo', '~> 2.2', '>= 2.2.2'
+gem 'mongoid', '~> 5.1'
 
 # Use Redis
 gem "redis", "~> 3.0.6"
@@ -19,8 +19,8 @@ gem 'gmaps4rails', "~> 1.5.6"
 gem "geo-distance", "~> 0.2.0"
 
 # Image uploader and processing
-gem 'carrierwave-mongoid', "~> 0.6.3"
-gem 'mongoid-grid_fs', github: 'ahoward/mongoid-grid_fs'
+gem 'carrierwave-mongoid', "~> 0.8.1"
+gem 'mongoid-grid_fs', '~> 2.2', '>= 2.2.1'
 gem "mini_magick", "~> 3.6.0"
 gem 'fog', '~> 1.18.0'
 
@@ -51,6 +51,8 @@ gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
+
+gem 'figaro', '~> 1.1.1'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
