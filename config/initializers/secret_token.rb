@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-RailsMongoid::Application.config.secret_key_base = 'ba627421bc796c4f406441543e3fada3d01471f9af8195dce8764b9532c19e143860c0fafb0acb3b6d043ccec994c88ce2c28b7cc3cd1c8d2ef9f6d11e3c19d3'
+TravelCrumbz::Application.config.secret_key_base = 'ba627421bc796c4f406441543e3fada3d01471f9af8195dce8764b9532c19e143860c0fafb0acb3b6d043ccec994c88ce2c28b7cc3cd1c8d2ef9f6d11e3c19d3'

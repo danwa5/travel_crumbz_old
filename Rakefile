@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-RailsMongoid::Application.load_tasks
+TravelCrumbz::Application.load_tasks

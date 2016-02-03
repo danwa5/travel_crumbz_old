@@ -1,4 +1,4 @@
-RailsMongoid::Application.routes.draw do
+TravelCrumbz::Application.routes.draw do
 
   # Add comment from post show page
   # match "posts/:post_id/comments", :action=>"create_comment_from_post", :via=>[:post], :controller=>"comments"
