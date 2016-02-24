@@ -26,7 +26,7 @@ class Post
   field :end_date, type: Date
   field :likes, type: Integer
   field :loves, type: Integer
-  field :user_id, type: BSON::ObjectId
+  # field :user_id, type: BSON::ObjectId
 
   index({ starred: 1 })
   index({ remember_token: 1 })

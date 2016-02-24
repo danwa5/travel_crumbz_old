@@ -11,8 +11,8 @@ class Comment
 
   field :rating, type: Integer
   field :body, type: String
-  field :post_id, type: BSON::ObjectId
-  field :user_id, type: BSON::ObjectId
+  # field :post_id, type: BSON::ObjectId
+  # field :user_id, type: BSON::ObjectId
 
   def get_create_date
     String str = String.new
