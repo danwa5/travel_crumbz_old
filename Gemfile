@@ -5,10 +5,10 @@ ruby '2.1.2'
 gem 'rails', '4.0.0'
 
 # Use mongodb as database
-gem 'bson', '~> 4.0', '>= 4.0.1'
+gem 'bson', '3.0'
 gem 'bson_ext'
-gem 'mongo', '~> 2.2', '>= 2.2.2'
-gem 'mongoid', '~> 5.1'
+gem 'mongo', '~> 2.0.0'
+gem 'mongoid', '~> 4.0.0'
 
 # Use Redis
 gem "redis", "~> 3.2.1"
